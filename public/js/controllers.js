@@ -6,14 +6,10 @@ function AppCtrl($scope, socket) {
 
   // Socket listeners
   // ================
-
-  socket.on('init', function (data) {
-    $scope.name = data.name;
-    $scope.users = data.users;
-  });
-
-  socket.on('send:message', function (message) {
-    $scope.messages.push(message);
+ 
+   socket.on('send:lobby', function (data) {
+    $scope.lobbys.push(data.titre);
+    $scope.titre= data.titre;
   });
 
   socket.on('change:name', function (data) {
@@ -21,19 +17,12 @@ function AppCtrl($scope, socket) {
   });
 
   socket.on('user:join', function (data) {
-    $scope.messages.push({
-      user: 'chatroom',
-      text: 'User ' + data.name + ' has joined.'
-    });
+ 
     $scope.users.push(data.name);
   });
 
-  // add a message to the conversation when a user disconnects or leaves the room
   socket.on('user:left', function (data) {
-    $scope.messages.push({
-      user: 'chatroom',
-      text: 'User ' + data.name + ' has left.'
-    });
+    
     var i, user;
     for (i = 0; i < $scope.users.length; i++) {
       user = $scope.users[i];
@@ -47,54 +36,69 @@ function AppCtrl($scope, socket) {
   // Private helpers
   // ===============
 
-  var changeName = function (oldName, newName) {
-    // rename user in list of users
-    var i;
-    for (i = 0; i < $scope.users.length; i++) {
-      if ($scope.users[i] === oldName) {
-        $scope.users[i] = newName;
-      }
-    }
-
-    $scope.messages.push({
-      user: 'chatroom',
-      text: 'User ' + oldName + ' is now known as ' + newName + '.'
-    });
-  }
-
   // Methods published to the scope
   // ==============================
+  $scope.sendLobby = function () {
 
-  $scope.changeName = function () {
-    socket.emit('change:name', {
-      name: $scope.newName
-    }, function (result) {
-      if (!result) {
-        alert('There was an error changing your name');
-      } else {
-        
-        changeName($scope.name, $scope.newName);
+    // add locally
+    $scope.lobbys.push($scope.lobby);
 
-        $scope.name = $scope.newName;
-        $scope.newName = '';
-      }
+    socket.emit('send:lobby', {
+      lobby: $scope.lobby,
+      user: $scope.name
     });
   };
+/*
+  $scope.connectUser = function () {
 
-  $scope.messages = [];
+    $scope.resLogin = $scope.login;
+    $scope.resPassword = $scope.password;
 
-  $scope.sendMessage = function () {
-    socket.emit('send:message', {
-      message: $scope.message
+    socket.emit('send:login', {
+      login: $scope.login,
+      password: $scope.password
     });
+  };*/
 
-    // add the message to our model locally
-    $scope.messages.push({
-      user: $scope.name,
-      text: $scope.message
-    });
 
-    // clear message box
-    $scope.message = '';
-  };
+
 }
+
+
+
+
+
+
+
+function LobbyCtrl($scope, $routeParams,socket) {
+    $scope.LobbyName=$routeParams;
+
+    $scope.retourIndex = function () {
+
+       socket.emit('refresh', {
+        
+        });
+    
+
+   };
+  
+
+}
+
+function MainCtrl($scope,socket) {
+
+    socket.on('init', function (data) {
+    $scope.name = data.name;
+    $scope.users = data.users;
+    $scope.lobbys= data.lobbys;
+    
+  });
+
+
+ 
+
+
+  
+
+}
+

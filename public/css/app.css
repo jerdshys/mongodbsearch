@@ -3,7 +3,7 @@
 .overflowable {
   height: 240px;
   overflow-y: auto;
-  border: 1px solid #000;
+  
 }
 
 .overflowable p {
@@ -17,4 +17,17 @@
 
 .clr {
   clear: both;
+}
+
+/* bootstrap */
+
+h1
+{
+	margin-bottom: 55px !important;
+}
+
+h2,h3
+{
+	margin-bottom: 8px !important;
+	margin-top: 30px !important;
 }

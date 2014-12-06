@@ -1,0 +1,48 @@
+div(role="navigation",class="navbar navbar-default navbar-fixed-top")
+  .container-fluid
+    .navbar-header
+        button(type="button",class="navbar-toggle collapsed",data-toggle="collapse",data-target=".navbar-collapse")
+          span(class="sr-only") Toggle Navigaton
+          span(class="icon-bar")
+          span(class="icon-bar")
+          span(class="icon-bar")
+        a(class="navbar-brand" href="#") 
+          i.fa.fa-home
+    .navbar-collapse.collapse
+      ul.nav.navbar-nav
+        li.active
+          a(href="#") Catalogue
+        li
+          a(href="#") Producteurs
+        li
+          a(href="#") Vendeurs
+        li.dropdown
+          a(href="#",class="dropdown-toggle",data-toggle="dropdown") Plus.. 
+            span.caret
+          ul(class="dropdown-menu",role="menu")
+            li
+              a(href="#") Action
+            li
+              a(href="#") Another action
+            li
+              a(href="#") Something else here
+            li.divider
+            li.dropdown-header Nav header
+            li
+              a(href="#") Separated link
+            li
+              a(href="#") One more separated link
+     
+      ul.nav.navbar-nav.navbar-right
+        if(!user)
+          li
+            a(href="/register") register
+          li.active
+            a(href="/login") login
+        if(user)
+          li
+            a(href="/profile") My account : #{user.username}
+          li
+            a(href="/logout") Logout
+      
+       

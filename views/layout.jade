@@ -1,9 +1,44 @@
 doctype html
 html(ng-app="myApp")
   head
+    script.
+        var passport = {};
+        passport.user = (!{JSON.stringify(user)});
     meta(charset='utf8')
     base(href='/')
-    title Angular Socket.io IM Demo App
+    title Foodr
+    link(href='http://fonts.googleapis.com/css?family=Open+Sans',rel='stylesheet',type='text/css')
+    link(href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css",rel="stylesheet")
+
     link(rel='stylesheet', href='/css/app.css')
+    link(rel='stylesheet', href='/css/pace.css')
+    
+    link(rel='stylesheet', href='/css/layout.css')
+    link(rel='stylesheet', href='/css/style.css')
+    script(src='/css/pace.min.js')
   body
-    block body
+    div.col-md-12.col-md-offset-1.container
+        include navbar.jade
+    div.col-md-12.nopadding
+        .leftbar.col-sm-2.nopadding
+            .bgmenu
+            .menu
+                .logo 
+                    img(src="img/logo.png")
+                    .col-md-12.menubutton 
+                        i.fa.fa-home 
+                        span &nbsp;
+                            a(href="/") Accueil
+                    .col-md-12.menubutton 
+                        i.fa.fa-book
+                        span &nbsp;
+                            a(href="/catalogue") Catalogue
+                    .col-md-12.menubutton
+                        i.fa.fa-users
+                        span &nbsp;Communauté
+                    .col-md-12.menubutton
+                        i.fa.fa-user
+                        span &nbsp;Mon compte
+        .col-sm-10.frame.nopadding
+            .bg
+            block body

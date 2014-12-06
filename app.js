@@ -5,7 +5,48 @@
 
 var express = require('express'),
   routes = require('./routes'),
-  socket = require('./routes/socket.js');
+  socket = require('./routes/socket'),
+  api = require('./routes/api'),
+  mongoose = require('mongoose'),
+  http = require('http'),
+  mongoose = require('mongoose'),
+  passport = require('passport'),
+  LocalStrategy = require('passport-local').Strategy,
+  passportLocalMongoose = require('passport-local-mongoose');
+
+
+
+var Schema = mongoose.Schema;
+var Account = new Schema({
+    username: String,
+    password: String
+});
+
+
+
+Account.plugin(passportLocalMongoose);
+Account=mongoose.model('Account', Account);
+//passport
+passport.use(new LocalStrategy(Account.authenticate()));
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
+
+// mongoose
+//mongoose.connect('mongodb://localhost/passport_local_mongoose');
+
+
+mongoose.connect('mongodb://localhost/foodr');
+
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback () {
+  console.log("mongoose success");
+});
+
+
+
+
 
 var app = module.exports = express.createServer();
 
@@ -15,39 +56,120 @@ var io = require('socket.io').listen(app);
 // Configuration
 
 app.configure(function(){
-  app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.set('view options', {
     layout: false
   });
   app.use(express.bodyParser());
-  app.use(express.methodOverride());
+  
+
+  //app.use(express.methodOverride());
+
+  //set that all templates are located in `/public` directory
+  app.use(express.static(__dirname + '/bower_components'));
   app.use(express.static(__dirname + '/public'));
+  
+
+  app.use(express.logger());
+  app.use(express.methodOverride());
+  app.use(express.cookieParser());
+  app.use(express.session({ secret: 'keyboard cat' }));
+  app.use(passport.initialize());
+  app.use(passport.session());
   app.use(app.router);
+
 });
 
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
+
 app.configure('production', function(){
   app.use(express.errorHandler());
 });
 
 // Routes
-
-app.get('/', routes.index);
 app.get('/partials/:name', routes.partials);
+
+// \(o.o)\ ROUTES /(o.o)/ -------------------------------------------------
+// JSON API
+/*app.get('/api/posts', api.posts);
+app.get('/api/post/:id', api.post);
+
+app.put('/api/post/:id', api.editPost);
+app.delete('/api/post/:id', api.deletePost);*/
+
+app.post('/api/post', api.addFood);
+app.get('/api/get', api.getFood);
+
+// passportjs -------------------------------------------------------------
+
+
+ app.get('/', function (req, res) {
+       res.render('index', { user : req.user });
+   });
+ app.get('/register', function (req, res) { 
+      res.render('index', { user : req.user });
+   });
+ app.get('/login', function (req, res) { 
+      res.render('index', { user : req.user });
+   });
+
+  app.get('/logout', function(req, res){
+      req.session.destroy();
+      res.render('index', { user : '' });
+
+  });
+
+    app.get('/*', function(req, res){
+     
+      res.redirect('/');
+
+  });
+    
+
+  app.post('/register', function(req, res) {
+    Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
+        if (err) {
+            return res.render('register', { account : account });
+        }
+        console.log("register user passport");
+        passport.authenticate('local')(req, res, function () {
+          res.redirect('/');
+        });
+    });
+  });
+
+
+
+
+
+/*  app.post('/api/catalogue', function(req, res) {
+    res.json(req.body);
+    console.log('server addFood :  '+req.body.nom);
+  });
+*/
+
+  app.post('/login', passport.authenticate('local'), function(req, res) {
+      res.redirect('/');
+  });
+
+  app.get('/ping', function(req, res){
+      res.send("pong!", 200);
+  });
+
+console.log("passport.js launched");
+// Socket.io Communication
 
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
-
-// Socket.io Communication
 
 io.sockets.on('connection', socket);
 
 // Start server
 
-app.listen(3000, function(){
+app.listen(8080, function(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 });
+

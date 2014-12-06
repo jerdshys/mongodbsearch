@@ -1,7 +1,8 @@
-// Keep track of which names are used so that there are no duplicates
-var userNames = (function () {
+// class users
+var users = (function () {
   var names = {};
-
+  
+  // does username allready exists
   var claim = function (name) {
     if (!name || names[name]) {
       return false;
@@ -11,20 +12,20 @@ var userNames = (function () {
     }
   };
 
-  // find the lowest unused "guest" name and claim it
+  // find the lowest unused guest 
   var getGuestName = function () {
-    var name,
+    var name
       nextUserId = 1;
 
     do {
-      name = 'Guest ' + nextUserId;
+      name = 'Schneke #' + nextUserId;
       nextUserId += 1;
     } while (!claim(name));
 
     return name;
   };
 
-  // serialize claimed names as an array
+  // users list
   var get = function () {
     var res = [];
     for (user in names) {
@@ -34,6 +35,7 @@ var userNames = (function () {
     return res;
   };
 
+  // delete
   var free = function (name) {
     if (names[name]) {
       delete names[name];
@@ -41,21 +43,58 @@ var userNames = (function () {
   };
 
   return {
-    claim: claim,
     free: free,
     get: get,
     getGuestName: getGuestName
   };
 }());
 
+var lobbys = (function () {
+  var names = [];
+
+   // lobbys list
+  var get = function () {
+    return names;
+  };
+
+  // add lobby to list
+  var getNewList = function (name)
+  {
+     names.push(name);
+     return names;
+  };
+
+  return {
+    get: get,
+    getNewList: getNewList
+  };
+
+}());
+
 // export function for listening to the socket
 module.exports = function (socket) {
-  var name = userNames.getGuestName();
+  var name = users.getGuestName();
+  
+  socket.on('connection', function(client){
+    client.on('message', function(err, msg){
+        client.broadcast.emit('message', msg);
+    });
+ });
+
+
+  socket.on('refresh',function() {
+    socket.emit('init', {
+      name: name,
+      users: users.get(),
+      lobbys: lobbys.get()
+    });
+  });
 
   // send the new user their name and a list of users
   socket.emit('init', {
     name: name,
-    users: userNames.get()
+    users: users.get(),
+    lobbys: lobbys.get()
   });
 
   // notify other clients that a new user has joined
@@ -63,31 +102,25 @@ module.exports = function (socket) {
     name: name
   });
 
-  // broadcast a user's message to other users
-  socket.on('send:message', function (data) {
-    socket.broadcast.emit('send:message', {
-      user: name,
-      text: data.message
-    });
+  // broadcast a user's lobby to other users + list of lobys
+  socket.on('send:lobby', function (data) {
+     socket.broadcast.emit('send:lobby', {
+   //   user: name,
+     titre: data.lobby,
+     lobbys: lobbys.getNewList(data.lobby)
+
+     });
+
   });
 
-  // validate a user's name change, and broadcast it on success
-  socket.on('change:name', function (data, fn) {
-    if (userNames.claim(data.name)) {
-      var oldName = name;
-      userNames.free(oldName);
+  socket.on('send:login', function (data) {
+    console.log("socket : login user "+data.login)
+     socket.emit('send:login', {
+   //   user: name,
+      login : data.login,
+      password : data.password,
+     });
 
-      name = data.name;
-      
-      socket.broadcast.emit('change:name', {
-        oldName: oldName,
-        newName: name
-      });
-
-      fn(true);
-    } else {
-      fn(false);
-    }
   });
 
   // clean up when a user leaves, and broadcast it to other users
@@ -95,6 +128,6 @@ module.exports = function (socket) {
     socket.broadcast.emit('user:left', {
       name: name
     });
-    userNames.free(name);
+    users.free(name);
   });
 };

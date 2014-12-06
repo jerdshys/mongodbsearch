@@ -1,0 +1,20 @@
+fonts : 
+	texte : open sans
+	logo : pacifico
+
+theme : agency ( landing )
+
+jquery : PACE.js , headesive.js 
+
+librairies
+
+user system : passport passport-local
+database : mongodb mongoose
+templating : jade
+
+=========================
+commandes console mongodb
+=========================
+>use db
+>show collections
+>db.collection.find();

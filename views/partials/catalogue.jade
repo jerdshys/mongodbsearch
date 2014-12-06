@@ -1,0 +1,15 @@
+div(ng-controller="AddFoodCtrl",class="nopadding")
+	.col-md-2
+		h3 <i class="fa fa-user"></i> Catalogue
+		form(class='form', ng-submit='addFood()')
+			input(class='form-control', ng-model='form.nom', placeholder='nom') 
+			input(class='form-control', ng-model='form.picture', placeholder='image') 
+			input(class='btn btn-default', type='submit', value='Ajouter')
+		h3 <i class="fa fa-search"></i> Search
+			input(class='form-control', ng-model='search', placeholder='search')
+		h3 Upload image
+			input(type="file",ng-file-select ng-file-model="myFiles",ng-file-change="fileSelected($files, $event)",ng-multiple="true|false", accept="image/*,*.pdf,*.xml",resetOnClick="true|false")                              
+			//- div(ng-file-drop ng-file-model="myFiles",ng-file-change="fileDropped($files, $event, $rejectedFiles)",ng-multiple="true|false",accept="image/*",ng-rejected-file-model="rejFiles",allowDir="true|false",dragOverClass="{accept:'acceptClass', reject:'rejectClass', delay:100}|myDragOverClass|calcDragOverClass($event)",dropAvailable="dropSupported",stopPropagation="true|false",hideOnDropNotAvailable="true|false") Drop files here
+	.col-md-10.gallerie.nopadding
+		div(class="col-md-3 gallerieItem",ng-repeat="item in catalogue | filter:search")
+			{{ item.name }} {{ item.picture }}
