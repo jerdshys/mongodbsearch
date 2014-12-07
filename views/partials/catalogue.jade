@@ -8,8 +8,9 @@ div(ng-controller="AddFoodCtrl",class="nopadding")
 		h3 <i class="fa fa-search"></i> Search
 			input(class='form-control', ng-model='search', placeholder='search')
 		h3 Upload image
-			input(type="file",ng-file-select ng-file-model="myFiles",ng-file-change="fileSelected($files, $event)",ng-multiple="true|false", accept="image/*,*.pdf,*.xml",resetOnClick="true|false")                              
-			//- div(ng-file-drop ng-file-model="myFiles",ng-file-change="fileDropped($files, $event, $rejectedFiles)",ng-multiple="true|false",accept="image/*",ng-rejected-file-model="rejFiles",allowDir="true|false",dragOverClass="{accept:'acceptClass', reject:'rejectClass', delay:100}|myDragOverClass|calcDragOverClass($event)",dropAvailable="dropSupported",stopPropagation="true|false",hideOnDropNotAvailable="true|false") Drop files here
+		form(class='form', ng-submit='addFile()')
+			input(ng-model="fileForm.file",type="file")
+			input(class='btn btn-default',type='submit', value='Ajouter')
 	.col-md-10.gallerie.nopadding
 		div(class="col-md-3 gallerieItem",ng-repeat="item in catalogue | filter:search")
-			{{ item.name }} {{ item.picture }}
+			{{item.name}} {{item.picture}}

@@ -1,9 +1,6 @@
 doctype html
 html(ng-app="myApp")
   head
-    script.
-        var passport = {};
-        passport.user = (!{JSON.stringify(user)});
     meta(charset='utf8')
     base(href='/')
     title Foodr
@@ -16,6 +13,11 @@ html(ng-app="myApp")
     link(rel='stylesheet', href='/css/layout.css')
     link(rel='stylesheet', href='/css/style.css')
     script(src='/css/pace.min.js')
+    script.
+        var passport = {};
+        passport.user = (!{JSON.stringify(user)});
+    script(src="angular-file-upload-shim.min.js") 
+    script(src="angular-file-upload.min.js")
   body
     div.col-md-12.col-md-offset-1.container
         include navbar.jade
