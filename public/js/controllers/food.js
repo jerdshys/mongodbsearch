@@ -24,11 +24,10 @@ function AddFoodCtrl($scope, $http, $location) {
   });
 
   $scope.addFile = function () {
-    alert("lol");
-    alert($scope.fileForm.files);
-          console.log($scope.fileForm.file);
-
-        }
+    alert("file"+$scope.fileForm.files);
+    alert("titre"+$scope.fileForm.titre);
+    console.log($scope.fileForm);
+  }
 
   
 }
