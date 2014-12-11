@@ -10,37 +10,49 @@ html(ng-app="myApp")
     link(rel='stylesheet', href='/css/app.css')
     link(rel='stylesheet', href='/css/pace.css')
     
-    link(rel='stylesheet', href='/css/layout.css')
     link(rel='stylesheet', href='/css/style.css')
     script(src='/css/pace.min.js')
     script.
         var passport = {};
-        passport.user = (!{JSON.stringify(user)});
-    script(src="angular-file-upload-shim.min.js") 
-    script(src="angular-file-upload.min.js")
+        if(user !== null )
+            passport.user = (!{JSON.stringify(user)});
+    script(src='js/lib/angular/angular.js')
+    script(src='jquery/dist/jquery.js')
+    script(src='/bootstrap/dist/js/bootstrap.js')
+    script(src='/ng-file-upload/angular-file-upload.js') 
+    script(src='/socket.io/socket.io.js')
+    script(src='js/app.js')
+    script(src='js/services.js')
+    script(src='js/controllers.js')
+    script(src='js/controllers/auth.js')
+    script(src='js/controllers/food.js')
+    script(src='js/filters.js')
+    script(src='js/directives.js')
+
   body
-    div.col-md-12.col-md-offset-1.container
+    div#wrapper
         include navbar.jade
-    div.col-md-12.nopadding
-        .leftbar.col-sm-2.nopadding
-            .bgmenu
-            .menu
-                .logo 
-                    img(src="img/logo.png")
-                    .col-md-12.menubutton 
-                        i.fa.fa-home 
-                        span &nbsp;
-                            a(href="/") Accueil
-                    .col-md-12.menubutton 
-                        i.fa.fa-book
-                        span &nbsp;
-                            a(href="/catalogue") Catalogue
-                    .col-md-12.menubutton
-                        i.fa.fa-users
-                        span &nbsp;Communauté
-                    .col-md-12.menubutton
-                        i.fa.fa-user
-                        span &nbsp;Mon compte
-        .col-sm-10.frame.nopadding
-            .bg
-            block body
+        div.col-md-12.nopadding#content
+            .leftbar.nopadding
+                .bgmenu
+                .menu
+                    .logo 
+                        img(src="img/logo.png")
+                        .col-md-12.menubutton 
+                            i.fa.fa-home 
+                            span &nbsp;
+                                a(href="/") Accueil
+                        .col-md-12.menubutton 
+                            i.fa.fa-book
+                            span &nbsp;
+                                a(href="/catalogue") Catalogue
+                        .col-md-12.menubutton
+                            i.fa.fa-users
+                            span &nbsp;Communauté
+                        .col-md-12.menubutton
+                            i.fa.fa-user
+                            span &nbsp;Mon compte
+            .frame.nopadding
+                .bg
+                block body
+

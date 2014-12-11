@@ -7,10 +7,14 @@ div(ng-controller="AddFoodCtrl",class="nopadding")
 			input(class='btn btn-default', type='submit', value='Ajouter')
 		h3 <i class="fa fa-search"></i> Search
 			input(class='form-control', ng-model='search', placeholder='search')
-		//h3 Upload image
-		//form(class='form', ng-submit='addFile()')
-		//	input(ng-model="fileForm.file",type="file")
-		//	input(class='btn btn-default',type='submit', value='Ajouter')
+		h3 Upload image
+			input(type="text",ng-model="myModelObj")
+			input(type="file",ng-file-select="onFileSelect($files)")
+			input(type="file",ng-file-select="onFileSelect($files)" multiple accept="image/*")
+			div(class="button",ng-file-select="onFileSelect($files)",data-multiple="true")
+			div(ng-file-drop="onFileSelect($files)",ng-file-drag-over-class="optional-css-class-name-or-function",ng-show="dropSupported") drop files here
+			div(ng-file-drop-available="dropSupported=true",ng-show="!dropSupported") HTML5 Drop File is not supported!
+			button(ng-click="upload.abort()") Cancel Upload
 	.col-md-10.gallerie.nopadding
 		div(class="col-md-3 gallerieItem nopadding",ng-repeat="item in catalogue | filter:search")
 			.gallerieThumbnail

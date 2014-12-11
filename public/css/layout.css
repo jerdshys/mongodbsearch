@@ -1,17 +1,68 @@
+* { 
+	margin: 0; 
+}
+
+html, body
+{
+	height: 100%;
+}
+
 body
 {
 	background-image : url('../img/background.jpg');
 	background-size:cover;
-
-
 	font-family: 'Open Sans', sans-serif !important;
 }
 
+#wrapper 
+{
+	min-height: 100%;
+	height:     auto !important;
+	height:     100%;
+	margin:     0 auto -44px; /* -44px being the size of the footer */
+}
+
+.navbar
+{
+	width: 100% !important;
+	border-radius: 0px !important;
+	margin-bottom: 0px !important
+
+}
+
+#content
+{
+	display:table-cell;
+    vertical-align:top;
+
+}
+
+.leftbar
+{
+	position: fixed;
+	width: 250px;
+	z-index: 10;
+}
+
+.frame
+{
+	padding-left: 250px;	
+	position: fixed;
+	width : 100%;
+}
+
+#footer,#push {
+	height: 44px;	
+}    
+
+#footer
+{
+	background-color: red;
+}
 
 
 .logo
 {
-	
 	margin-bottom: 20px;
 	background-image: none !important;
 	padding-top: 20px;
@@ -26,36 +77,18 @@ body
 .container
 {
 	background-color:  rgba(255,255,255,0.4) !important;
-	
 	padding-top: 52px;
-
 }
 
-.frame
-{
-	background-color:  rgba(255,255,255,0.4) !important;
-	color: #2E2E2E;
-	min-height: 700px;
-	padding-top: 50px;
-	padding-bottom: 500px;
-	position: relative;
-    z-index: 1; 
- }
-.menu
-{
-	
-    /*background-image: url('../img/bright_squares.png') !important;*/
-	background-color: white !important;
 
-
-}
 
 .col-md-3
 {
 	border : 1px solid rgba(106,106,107,0.3);
-
 }
-.frame .bg {
+
+.frame .bg 
+{
     position: absolute;
     z-index: -1;
     top: 0;
@@ -65,7 +98,6 @@ body
     background: url('../img/bgbody.png') center center;
     opacity: .6;
     width: 100%;
-    height: 100%;
 }
 
 .bandeau
@@ -78,8 +110,8 @@ body
 	padding-top: 15px;
 	padding-right: 10px;
 	margin-bottom: 30px !important;
-	
 }
+
 .title
 {
 	opacity : 1 !important;
@@ -98,14 +130,11 @@ body
 	background-color:  rgba(255,255,255,0.7) !important; 
 	padding: 57px !important;
 	height: 500px;
-
-
 }
 
 .boutonform,.inputform
 {
 	width: 100% !important;
-	
 }
 
 .boutonform
@@ -117,11 +146,8 @@ body
 .menu
 {
 	background-color:  rgba(255,255,255,0.4) !important; 
-	
-	
-	padding-bottom: 500px;
-
 }
+
 .menubutton
 {
 	background-color: rgba(0,127,14,0.8);
@@ -153,77 +179,3 @@ body
    margin: 0 !important;
 }
 
-.gallerie
-{
-	background-color: rgba(0,0,0,0.2);
-}
-
-.gallerieItem
-{
-/*	background-color: rgba(0,0,0,0.8);
-*/	/*border: 1px solid rgba(255,255,255,1);*/
-	height: 210px;
-	cursor:pointer;
-    float : left;
-	text-align: center;
-}
-
-.gallerieThumbnail
-{
-	float: left;
-	height: 180px;
-	text-align: center;
-	width: 100%;
-	border-bottom: 1px solid white;
-}
-
-.gallerieText
-{
-	float: left;
-	height: 30px;
-	color: white;
-	width: 100%;
-	font-size : 10px;
-
-}
-
-.gallerieTextNom,.gallerieTextPrix
-{
-	float: left;
-	height: 15px;
-	color: white;
-	padding-left : 5px;
-	font-size : 10px;
-	width: 85%;
-	text-align: left;
-	
-}
-
-.gallerieTextButton
-{
-	display: inline-block;
-	width : 15%;
-	height : 28px;
-	background-color: rgba(83, 169, 116, 0.8);
-	font-size: 14px;
-	padding-top: 4px;
-}
-
-.gallerieItem:hover
-{
-	background-color: rgba(0,0,0,0.1);
-	cursor:pointer;
-}
-
-.gallerieThumbnail>img
-{
-	max-width: 100%;
-	max-height: 100%;
-	vertical-align: middle;
-}
-
-.helper {
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-}
