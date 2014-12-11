@@ -160,8 +160,8 @@ body
 
 .gallerieItem
 {
-	background-color: rgba(0,0,0,0.8);
-	/*border: 1px solid rgba(255,255,255,1);*/
+/*	background-color: rgba(0,0,0,0.8);
+*/	/*border: 1px solid rgba(255,255,255,1);*/
 	height: 210px;
 	cursor:pointer;
     float : left;
