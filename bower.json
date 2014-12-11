@@ -1,0 +1,19 @@
+{
+  "name": "foodr",
+  "version": "0.0.0",
+  "authors": [
+    "jerdshys <deshayesch@eisti.eu>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.1",
+    "ng-file-upload": "~2.0.4"
+  }
+}
