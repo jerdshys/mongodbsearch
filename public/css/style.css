@@ -6289,6 +6289,13 @@ button.close {
 	margin: 0; 
 }
 
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
+
+
 html, body
 {
 	height: 100%;
@@ -6319,8 +6326,7 @@ body
 
 #content
 {
-	display:table-cell;
-    vertical-align:top;
+	padding-top: 50px !important;
 
 }
 
@@ -6328,14 +6334,37 @@ body
 {
 	position: fixed;
 	width: 250px;
-	z-index: 10;
+	z-index: 300;
+	height: 100%;
+	background: url('../img/bgLeftBar.png') center center;
 }
+
+.bgmenu
+{
+	background-color: rgba(255,255,255,0.1);
+}
+/*
+.frame .bg 
+{
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: url('../img/bgbody.png') center center;
+    opacity: .6;
+    width: 100%;
+}*/
+
 
 .frame
 {
-	padding-left: 250px;	
+	padding-left: 250px !important;	
 	position: fixed;
 	width : 100%;
+	height: 100%;
+	background: url('../img/bgbody.png') center center;
 }
 
 #footer,#push {
@@ -6368,25 +6397,6 @@ body
 }
 
 
-
-.col-md-3
-{
-	border : 1px solid rgba(106,106,107,0.3);
-}
-
-.frame .bg 
-{
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: url('../img/bgbody.png') center center;
-    opacity: .6;
-    width: 100%;
-}
-
 .bandeau
 {
 	color : white;
@@ -6414,7 +6424,7 @@ body
 
 .box
 {
-	background-color:  rgba(255,255,255,0.7) !important; 
+	background-color:  rgba(0,0,0,0.1) !important; 
 	padding: 57px !important;
 	height: 500px;
 }
@@ -6459,11 +6469,6 @@ body
 {
 	opacity: 0.8;
 	cursor: pointer;
-}
-
-.nopadding {
-   padding: 0 !important;
-   margin: 0 !important;
 }
 
 
