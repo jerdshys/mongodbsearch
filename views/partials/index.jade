@@ -1,28 +1,4 @@
-.paddingTop
-
-.col-md-3.col-md-offset-2.box
-    h3.bandeau <i class="fa fa-user"></i> Login
-    <br>
-    form(role='form', action="/login",method="post", style='max-width: 300px;')
-      .form-group
-          input.form-control(type='text', name="username", placeholder='Enter Username')
-      .form-group
-        input.form-control(type='password', name="password", placeholder='Password')
-      button.btn.btn-default(type='submit') Submit
-    <br> Password oublié?
-    //- [ {{resLogin}} | {{resPassword}}]
-
-
-
-.col-md-3.col-md-offset-2.box
-  h3.bandeau <i class="fa fa-sign-in"></i> Register
-  <br>
-  form(role='form', action="/register",method="post", style='max-width: 300px;')
-    .form-group
-        input.form-control(type='text', name="username", placeholder='Enter Username')
-    .form-group
-      input.form-control(type='password', name="password", placeholder='Password')
-    button.btn.btn-default(type='submit') Submit
-  
-
-
+#landing
+	#landingText
+		h1 Bienvenue sur foodr
+		p Foodr est un site qui met en relation des personnes interessées par la nourriture.

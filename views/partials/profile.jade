@@ -1,2 +1,22 @@
-.col-md-10.col-md-offset-1
-	h3 Profil de {{ user.username }}
+.paddingTop
+
+.col-md-10.col-md-offset-1.center
+	h2 Profil de {{ user.username }}
+	<br><br><br><br>
+	.col-md-4.menuDiv
+		a(href="/index")
+			i.fa.fa-book(style="font-size:30px;")
+			h5 Catalogue
+	.col-md-4.menuDiv
+		i.fa.fa-cog(style="font-size:30px;")
+		h5 Options
+	.col-md-4.menuDiv
+		i.fa.fa-user.fa-3(style="font-size:30px;")
+		h5 Gérer le compte
+	.col-md-4.menuDiv
+		i.fa.fa-star.fa-3(style="font-size:30px;")
+		h5 Favoris
+	.col-md-4.menuDiv
+		i.fa.fa-weixin.fa-3(style="font-size:30px;")
+		h5 Messages
+
