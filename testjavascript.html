@@ -1,21 +1,29 @@
 <html>
 <head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="bower_components/tag-it/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
+	<link href="bower_components/tag-it/css/jquery.tagit.css" rel="stylesheet" type="text/css">
+
+	<script type="text/javascript">
+    $(document).ready(function() {
+        $("#myTags").tagit();
+    });
+</script>
+
+
 
 </head>
 <body>
 
 
 
-
-<script>
-
-var obj={};
-obj[0]=['id0','nom0'];
-obj[1]=['id1','nom1'];
-
-alert(obj[0]+'/'+obj[1]);
-
-</script>
+<ul id="myTags">
+    <!-- Existing list items will be pre-added to the tags -->
+    <li>Tag1</li>
+    <li>Tag2</li>
+</ul>
 
 
 </body>

@@ -11,10 +11,38 @@ html(ng-app="myApp")
     link(rel='stylesheet', href='/css/pace.css')
     
     link(rel='stylesheet', href='/css/style.css')
+
+    link(rel="stylesheet",type="text/css",href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css")
+    link(href="css/jquery.tagit.css",rel="stylesheet",type="text/css")
+
     script(src='/css/pace.min.js')
-    script(src='js/lib/angular/angular.js')
     script(src='jquery/dist/jquery.js')
+    script(src='js/lib/angular/angular.js')
+
+    script(src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js",type="text/javascript",charset="utf-8")
+    script(src="tag-it/js/tag-it.js",type="text/javascript",charset="utf-8")
+    link(rel="stylesheet",type="text/css",href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css")
+    link(href="tag-it/css/jquery.tagit.css",rel="stylesheet",type="text/css")
+    //script(type="text/javascript",src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWdLzwiRds1-FAiO1xi--5uFZmoAxHHkI")
     
+    // google maps
+    //- script.
+    //-     function initialize() {
+    //-         var mapOptions = {
+    //-             center: { lat: -34.397, lng: 150.644},
+    //-             zoom: 8
+    //-         };
+    //-         var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+    //-     }
+    //-     google.maps.event.addDomListener(window, 'load', initialize);
+
+    script.
+        $(document).ready(function() {
+            $("#myTags").tagit();
+        });
+
+
+
     script.
         (function($){
             $(window).load(function(){
@@ -25,19 +53,27 @@ html(ng-app="myApp")
         var passport = {};
         passport.user = (!{JSON.stringify(user)});
     
-    
+   
     script(src='/bootstrap/dist/js/bootstrap.js')
     script(src='/ng-file-upload/angular-file-upload.js') 
     script(src='/socket.io/socket.io.js')
     script(src='/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js')
+
+    script(src='//maps.googleapis.com/maps/api/js?sensor=false')    
+    script(src='/lodash/dist/lodash.min.js')
+    script(src='/angular-google-maps/dist/angular-google-maps.min.js')
+    script(type="text/javascript",src="/angular-ui-utils/ui-utils.js")
 
     script(src='js/app.js')
     script(src='js/services.js')
     script(src='js/controllers.js')
     script(src='js/controllers/auth.js')
     script(src='js/controllers/food.js')
+    script(src='js/controllers/users.js')
     script(src='js/filters.js')
     script(src='js/directives.js')
+
+    script(src="//localhost:35729/livereload.js")
 
   body
     div#wrapper
@@ -58,7 +94,8 @@ html(ng-app="myApp")
                                 a(href="/catalogue") Catalogue
                         .col-md-12.menubutton
                             i.fa.fa-users
-                            span &nbsp;Communauté
+                            span &nbsp;
+                                a(href="/community") Communauté
                         .col-md-12.menubutton
                             i.fa.fa-user
                             span &nbsp;

@@ -14,8 +14,9 @@ module.exports = function(grunt) {
 	},
 	// running `grunt watch` will watch for changes
 	watch: {
-		files: "./public/css/*.less",
-		tasks: ["less"]
+		files: ["./public/css/*.less","./public/css/modules/*.less"],
+		tasks: ["less"],
+		options: { livereload:true }
 	}
 });
 	grunt.loadNpmTasks('grunt-contrib-less');

@@ -3,7 +3,7 @@
 
 // Declare app level module which depends on filters, and services
 
-var app = angular.module('myApp', ['myApp.filters', 'myApp.directives','angularFileUpload']).
+var app = angular.module('myApp', ['myApp.filters', 'myApp.directives','angularFileUpload','uiGmapgoogle-maps','ui.utils']).
   config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider.
       when('/', {
@@ -17,21 +17,43 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.directives','angularF
       when('/register', {
         templateUrl:'partials/register'
       }).
-       when('/logout', {
+      when('/logout', {
         templateUrl:'partials/logout',
         controller: 'LogOutCtrl'
       }).
-        when('/profile', {
+      // ---------------------------Profile --------------------------------
+      when('/profile', {
           templateUrl: 'partials/profile',
           controller: 'ProfileCtrl'
         }).
+      when('/profileCatalogue', {
+          templateUrl: 'partials/profileCatalogue',
+          controller: 'ProfileCatalogueCtrl'
+       }).
+      when('/profileCatalogueAdd', {
+          templateUrl: 'partials/profileCatalogueAdd'
+      }).
+      // ---------------------------Catalogue ------------------------------
       when('/catalogue', {
           templateUrl: 'partials/catalogue',
-          controller: 'AddFoodCtrl'
+          controller: 'CatalogueCtrl'
         }).
+      when('/catalogueMap', {
+          templateUrl: 'partials/catalogueMap',
+          controller: 'CatalogueCtrl'
+        }).
+       when('/item/:id', {
+          templateUrl: 'partials/item',
+          controller: 'ItemCtrl'
+        }).
+      // ---------------------------Users ------------------------------
       when('/addUser', {
         templateUrl: 'partials/addUser',
-        controller: AddUserCtrl
+        controller: 'AddUserCtrl'
+      }).
+      when('/community', {
+        templateUrl: 'partials/community',
+        controller: 'CommunityCtrl'
       }).
       otherwise({
         redirectTo: '/'

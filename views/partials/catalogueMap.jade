@@ -1,0 +1,9 @@
+.col-md-2
+	h3 <i class="fa fa-search"></i> Search
+		input(class='form-control', ng-model='search', placeholder='search')
+	a(href="/catalogueMap")
+		button(class='btn btn-default col-md-6') <i class="fa fa-list"></i>				
+	a(href="/catalogue")
+		button(class='btn btn-default col-md-6') <i class="fa fa-users"></i>	
+.col-md-10
+	ui-gmap-google-map(center='map.center',zoom='map.zoom')

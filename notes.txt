@@ -18,3 +18,5 @@ commandes console mongodb
 >use db
 >show collections
 >db.collection.find();
+>db.collection.insert();
+>db.collection.remove({});

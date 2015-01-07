@@ -1,0 +1,14 @@
+.col-md-8.nopadding
+	.itemTitle 
+		{{ item.name }}&nbsp;
+		span(style="background-color : {{ item.type | colorItem }};float:right;margin-right:20px;color:white;opacity:0.6;padding:4px;font-size:11px;") {{ item.type }}
+	.col-md-7.itemDescription {{ item.description }}
+	.col-md-5.itemDescription 
+		span(class="label label-default",ng-repeat="tag in item.tags",style="margin-right : 4px;margin-bottom:4px;float:left") 
+			{{ tag }}
+.col-md-4.itemPics.nopadding
+	img(src="upload/{{ item.user }}/{{item.name}}.jpg")
+	.col-md-12.itemDescription 
+		p <i class="fa fa-user"></i> Fait par {{ item.user }}
+		p Note <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+		p Voir le profil

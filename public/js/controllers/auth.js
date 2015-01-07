@@ -122,7 +122,7 @@ function DeletePostCtrl($scope, $http, $location, $routeParams) {
 
 function ProfileCtrl($scope, $http) {
     $scope.user = passport.user;
-   
-
 }
+
+
 

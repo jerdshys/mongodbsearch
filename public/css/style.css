@@ -7660,12 +7660,30 @@ yx-axis
   .ps-container:hover > .ps-scrollbar-y-rail:hover > .ps-scrollbar-y {
     background-color: #999; }
 
+form {
+  max-width: 290px;
+}
+form label {
+  margin-top: 5px;
+  color: grey;
+}
+form input[type="text"],
+form input[type="password"] {
+  height: 40px !important;
+  border-radius: 0px !important;
+}
 * {
   margin: 0;
 }
 .nopadding {
-  padding: 0 !important;
-  margin: 0 !important;
+  padding: 0px !important;
+  margin: 0px !important;
+}
+.borderRightGrey {
+  border-right: 1px solid grey;
+}
+.borderLeftGrey {
+  border-left: 1px solid grey;
 }
 a {
   text-decoration: none;
@@ -7673,6 +7691,11 @@ a {
 }
 a:hover {
   text-decoration: none;
+}
+#map-canvas {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 html,
 body {
@@ -7727,7 +7750,9 @@ body {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: url('../img/bgbody.png') center center;
+  /*background: url('../img/bgbody.png') center center;*/
+  background-color: rgba(255, 255, 255, 0.88);
+  padding-bottom: 50px !important;
 }
 #footer,
 #push {
@@ -7813,6 +7838,10 @@ body {
   width: 100%;
   height: 80px;
 }
+.littlePaddingTop {
+  width: 100%;
+  height: 40px;
+}
 label {
   color: white;
 }
@@ -7824,17 +7853,21 @@ input[type="password"] {
 /* all */
 ::-webkit-input-placeholder {
   font-style: italic;
+  font-size: 11px;
 }
 ::-moz-placeholder {
   font-style: italic;
+  font-size: 11px;
 }
 /* firefox 19+ */
 :-ms-input-placeholder {
   font-style: italic;
+  font-size: 11px;
 }
 /* ie */
 input:-moz-placeholder {
   font-style: italic;
+  font-size: 11px;
 }
 .menuDiv {
   margin-top: 40px;
@@ -7857,19 +7890,46 @@ input:-moz-placeholder {
   color: white;
   position: fixed;
   padding-top: 100px;
-  border-left: 5px solid black;
+  border-left: 2px solid black;
 }
 #landingText {
   padding: 15px;
   padding-left: 5%;
   background-color: rgba(0, 0, 0, 0.6);
 }
+.angular-google-map-container {
+  height: 900px;
+}
 /* gallerie de photos catalogue */
 .gallerie {
-  float: left;
-  background-color: rgba(0, 0, 0, 0.7);
+  float: right;
+  background-color: rgba(0, 0, 0, 0);
   height: 100%;
   max-height: 100%;
+}
+.hover {
+  transition: background-color 0.3s ease;
+  position: absolute;
+  float: left;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  color: rgba(255, 255, 255, 0);
+  padding-top: 55px;
+  text-align: center;
+}
+.hover a {
+  color: rgba(0, 0, 0, 0);
+}
+.hover:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+}
+.hover:hover a {
+  color: rgba(255, 255, 255, 0.8);
+}
+.hover:hover a:hover {
+  color: lightblue;
 }
 .gallerieItem {
   background-color: rgba(189, 195, 199, 0.1);
@@ -7879,6 +7939,7 @@ input:-moz-placeholder {
   cursor: pointer;
   float: left;
   text-align: center;
+  box-shadow: -1px 2px 10px 3px #000000 inset;
 }
 .gallerieItem:hover {
   background-color: rgba(0, 0, 0, 0.5);
@@ -7901,17 +7962,21 @@ input:-moz-placeholder {
 }
 .gallerieTextNom,
 .gallerieTextPrix {
+  padding-top: 6px;
   float: left;
-  height: 15px;
+  height: 30px;
   color: white;
   padding-left: 5px;
   font-size: 10px;
-  width: 85%;
+  width: 90%;
   text-align: left;
+}
+.gallerieTextPrix {
+  width: 10%;
 }
 .gallerieTextButton {
   display: inline-block;
-  width: 15%;
+  width: 0%;
   height: 30px;
   border-left: 1px solid white;
   font-size: 14px;
@@ -7927,4 +7992,141 @@ input:-moz-placeholder {
   display: inline-block;
   height: 100%;
   vertical-align: middle;
+}
+.catalogueListItem {
+  height: 50px;
+  width: 100%;
+  background-color: white;
+  margin-bottom: 1px !important;
+  /*	box-shadow: -1px 2px 10px 3px rgba(0, 0, 0, 0.1) inset;
+*/
+  text-align: center;
+}
+.catalogueListItemTitle {
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0);
+  padding-top: 15px;
+}
+.catalogueListItemText {
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding-top: 15px;
+  border-left: 1px solid white;
+}
+.catalogueListItemButton {
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 15px;
+  border-left: 1px solid white;
+  color: white;
+}
+.searchBar {
+  position: fixed;
+  margin-top: 80px;
+  width: 13.6% !important;
+  background-color: #f8f8f8 !important;
+  height: 900px;
+  border-left: 7px solid #F8F8F8;
+  border-right: 7px solid #F8F8F8;
+}
+.searchTitle {
+  width: 100%;
+  height: 35px;
+  padding-top: 6px;
+  padding-left: 8px;
+  border-bottom: 3px solid white;
+}
+.mode {
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  /*	box-shadow: -1px 2px 2px 3px #000000 inset;
+*/
+  color: grey;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+  background-color: #E2E2E2;
+}
+.modeIcon {
+  margin-top: 6px;
+  text-align: center;
+}
+.modeIcon i {
+  color: grey;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+.modeIcon i:hover {
+  color: lightblue;
+  cursor: pointer;
+  font-size: 19px;
+}
+.transparentIcon {
+  text-align: center;
+  /*	background-color:#EAEAEA;
+*/
+  height: 40px;
+  color: lightblue;
+  border-bottom: 1px solid lightgrey;
+  border-top: 1px solid lightgrey;
+  border-right: 1px solid lightgrey;
+}
+.transparentIcon i {
+  margin-top: 13px;
+}
+.transparent {
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 0!important;
+  border: none;
+  border-bottom: 1px solid lightgrey;
+  border-top: 1px solid lightgrey;
+  box-shadow: none;
+  height: 40px;
+}
+.transparent:focus {
+  border: 1px solid lightblue;
+  border-left: none;
+  box-shadow: none;
+  background-color: #EAEAEA;
+}
+.choiceBox {
+  padding-bottom: 4px;
+  padding-top: 2px;
+  padding-left: 8px;
+  margin-bottom: 2px;
+  text-align: center;
+  opacity: 0.65;
+  color: white;
+  font-size: 10px;
+  text-align: left;
+}
+.choiceBoxTitle {
+  width: 100%;
+  height: 28px;
+  font-size: 10px;
+  color: #ffffff;
+}
+.itemTitle {
+  background-color: #ffffff;
+  height: 80px;
+  padding-top: 30px;
+  padding-left: 20px;
+  font-size: 18px;
+  border-bottom: 1px solid #EAEAEA;
+}
+.itemDescription {
+  /*	margin-top: 5px;
+	padding: 20px;*/
+  background-color: rgba(255, 255, 255, 0.95);
+  min-height: 300px;
+  padding-top: 50px;
+  padding-bottom: 30px;
+  padding-left: 20px;
+}
+.itemPics {
+  border: 5px solid rgba(255, 255, 255, 0.95);
+}
+.itemPics img {
+  max-width: 100%;
+  max-height: 100%;
+  opacity: 0.8;
 }

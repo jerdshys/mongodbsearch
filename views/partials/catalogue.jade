@@ -1,28 +1,51 @@
-div(ng-controller="AddFoodCtrl",class="nopadding")
-	.col-md-2
-		h3 <i class="fa fa-user"></i> Catalogue
-		form(class='form', ng-submit='addFood()')
-			input(class='form-control', ng-model='form.nom', placeholder='nom') 
-			input(class='form-control', ng-model='form.picture', placeholder='image') 
-			input(class='btn btn-default', type='submit', value='Ajouter')
-		h3 <i class="fa fa-search"></i> Search
-			input(class='form-control', ng-model='search', placeholder='search')
-		h3 Upload image
-			input(type="text",ng-model="myModelObj")
-			input(type="file",ng-file-select="onFileSelect($files)")
-			div(class="button",ng-file-select="onFileSelect($files)",data-multiple="true")
-			div(ng-file-drop="onFileSelect($files)",ng-file-drag-over-class="optional-css-class-name-or-function",ng-show="dropSupported") drop files here
-			div(ng-file-drop-available="dropSupported=true",ng-show="!dropSupported") HTML5 Drop File is not supported!
-			button(ng-click="upload.abort()") Cancel Upload
+div(ng-controller="CatalogueCtrl",class="nopadding")
+	.col-md-2.nopadding.searchBar
+		.col-md-6.col-md-offset-3.mode
+			.col-md-6.nopadding(style="text-align:center")
+				a(href="/catalogueMap")
+					span.modeIcon <i class="fa fa-list"></i>
+			.col-md-6.nopadding(style="text-align:center;border-left:1px solid grey")
+				a(href="/catalogue")
+					span.modeIcon <i class="fa fa-users"></i>
+		<br><br><br>
+		.col-md-2.nopadding.transparentIcon
+			<i class="fa fa-search"></i>
+		.col-md-10.nopadding
+			input(class='form-control transparent', ng-model='search', placeholder='search...')
+		<br><br><br><br>
+		
+		.col-md-12.nopadding
+			.col-md-10.col-md-offset-1.choiceBox(style="color: grey")
+				input(type="radio",name="type",ng-model="type",value="") 
+				span &nbsp;All
+			.col-md-10.col-md-offset-1.choiceBox(style="color:{{ 'On demand' | colorItem }}")
+				input(type="radio",name="type",ng-model="type",value="On demand") 
+				span &nbsp;On Demand
+			.col-md-10.col-md-offset-1.choiceBox(style="color:{{ 'On the run' | colorItem }}")
+				input(type="radio",name="type",ng-model="type",value="On the run") 
+				span &nbsp;On The Run
+			.col-md-10.col-md-offset-1.choiceBox(style="color:{{ 'Groceries' | colorItem }}")
+				input(type="radio",name="type",ng-model="type",value="Groceries") 
+				span &nbsp;Groceries
+		<br><br><br><br><br><br><br>
+		
+		.col-md-2.nopadding.transparentIcon
+			<i class="fa fa-search"></i>
+		.col-md-10.nopadding
+			input(class='form-control transparent', ng-model='lieu', placeholder='lieu...')
+		
+		.col-md-12
+			Meudon
 	.col-md-10.gallerie.nopadding
-		div(class="col-md-3 gallerieItem nopadding",ng-repeat="item in catalogue | filter:search")
+		div(class="col-md-3 gallerieItem nopadding",ng-repeat="item in catalogue | filter:search | filter : type",ng-animate='animate',style="background-color : #2E2E2E; opacity : 0.73;")
+			.hover
+				a(href="item/{{ item._id }}") 
+					<i class="fa fa-shopping-cart"></i> Acheter <br><br>
+				a(href="item/{{ user._id }}")
+					<i class="fa fa-user"></i> Profil
 			.gallerieThumbnail
 				.helper
-				img(src="img/background_alt.jpg")
+				img(src="upload/{{ item.user }}/{{item.name}}.jpg")
 			.gallerieText
-				.gallerieTextNom {{item.name}} {{item.picture}}
-				.gallerieTextPrix <i class="fa fa-eur"></i>
-				.gallerieTextButton <i class="fa fa-eye"></i>
-
-
-
+					.gallerieTextNom(style="background-color : {{ item.type | colorItem }}") {{item.name}} {{ item.type }}
+					.gallerieTextPrix(style="background-color : {{ item.type | colorItem }}") <i class="fa fa-eur"></i>
