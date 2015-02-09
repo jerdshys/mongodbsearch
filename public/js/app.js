@@ -3,12 +3,20 @@
 
 // Declare app level module which depends on filters, and services
 
-var app = angular.module('myApp', ['myApp.filters', 'myApp.directives','angularFileUpload','uiGmapgoogle-maps','ui.utils']).
+// a rajouter -> ,'angularReverseGeocode','geolocation','textAngular'
+var app = angular.module('myApp',  ['myApp.filters', 
+                                    'myApp.directives',
+                                    'ngCookies',
+                                    'angularFileUpload',
+                                    'uiGmapgoogle-maps',
+                                    'ui.utils',
+                                    'geolocation']).
+
   config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider.
       when('/', {
         templateUrl: 'partials/index',
-        controller: AppCtrl
+        controller: IndexCtrl
       }).
       //PASSPORTJS
       when('/login', {
@@ -33,6 +41,18 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.directives','angularF
       when('/profileCatalogueAdd', {
           templateUrl: 'partials/profileCatalogueAdd'
       }).
+      when('/profileEdit', {
+         templateUrl: 'partials/profileEdit',
+         controller: 'EditProfileCtrl'
+      }).
+      when('/message', {
+        templateUrl: 'partials/message',
+        controller: 'MessageCtrl'
+      }).
+      when('/favorites', {
+        templateUrl: 'partials/favorites',
+        controller: 'FavoriteCtrl'
+      }).
       // ---------------------------Catalogue ------------------------------
       when('/catalogue', {
           templateUrl: 'partials/catalogue',
@@ -46,8 +66,20 @@ var app = angular.module('myApp', ['myApp.filters', 'myApp.directives','angularF
           templateUrl: 'partials/item',
           controller: 'ItemCtrl'
         }).
+       when('/buy', {
+          templateUrl: 'partials/buy',
+          controller: 'BuyCtrl'
+       }).
       // ---------------------------Users ------------------------------
-      when('/addUser', {
+       when('/user/:name', {
+          templateUrl: 'partials/user',
+          controller: 'UserCtrl'
+        }).
+       when('/comment/:name', {
+          templateUrl: 'partials/comment',
+          controller: 'CommentCtrl'
+       }).
+       when('/addUser', {
         templateUrl: 'partials/addUser',
         controller: 'AddUserCtrl'
       }).

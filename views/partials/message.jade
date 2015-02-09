@@ -1,0 +1,71 @@
+.col-md-12.nopadding.headerProfile
+	.col-md-8.profileCover
+		.col-md-3.col-md-offset-1
+			img(src="upload/{{ user.username }}/profilePic.jpg",class="img-circle",style="width: 110px; height : 100px;margin-top:3px;")
+
+		.col-md-8.profilePres
+			h3 Profil de {{ user.username }}
+			div
+				reverse-geocode(lat="{{userInfo.lat}}",lng="{{userInfo.lng}}")
+				button(ng-click="geolocation()") <i class="fa fa-paper-plane"></i> Me géolocaliser
+
+	.col-md-4.nopadding.menuDivContainer
+		.col-md-4.menuDiv
+			a(href="/profileCatalogue")
+				i.fa.fa-book
+				p Catalogue
+		.col-md-4.menuDiv
+			a(href="/profileEdit")
+				i.fa.fa-user.fa-3
+				p Mon profil
+		.col-md-4.menuDiv
+			a(href="/favorites")
+				i.fa.fa-star.fa-3
+				p Favoris
+		.col-md-4.menuDiv
+			a(href='/message')
+				i.fa.fa-weixin.fa-3
+				p Messages
+		.col-md-4.menuDiv
+			a(href='')
+				i.fa.fa-cog.fa-3
+				p Options
+		.col-md-4.menuDiv
+			a(href='')
+				i.fa.fa-question.fa-3
+				p Aide
+
+.col-md-9.nopadding.messaging
+	.col-md-1
+
+	.col-md-10
+		<br><br>
+		form(class='form', ng-submit='message(selectedUser)')
+			.input-group
+				<span class="input-group-addon" id="basic-addon1"><i class="fa fa-comment"></i></span>
+				<input type="text" ng-model="form.message" class="form-control" placeholder="écrivez un message..." aria-describedby="basic-addon1">
+		<br><br>
+		h4(ng-if="selectedUser.length>0") Conversation avec {{selectedUser}}
+		<br>
+		div(class="col-md-12 message",ng-repeat="message in messages |orderBy: '-sent'")
+			.col-md-1.nopadding
+				<span class="label label-success">{{message.from}}</span>
+			.col-md-10
+				{{message.message}}
+			.col-md-1.dateMessage
+				{{message.sent | date:'HH:mm'}}
+	
+	.col-md-1
+
+.col-md-3.nopadding.contactList
+	.contactHeader 
+		<br>
+		span Contacts
+		<br>
+	.contactSearch
+		i.fa.fa-search &nbsp;&nbsp;
+		input(type="text",ng-model="search",placeholder="rechercher...")
+	div(class="col-md-12 nopadding",ng-repeat="contact in userInfo.friends | filter:search ",ng-click="selectUser(contact)")
+		.contact
+			img(src="upload/{{ contact}}/profilePic.jpg",class="img-circle",style="width: 40px; height : 35px;opacity:0.8")
+			&nbsp;&nbsp; {{ contact }}

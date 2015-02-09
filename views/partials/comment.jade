@@ -1,0 +1,44 @@
+.col-md-12.nopadding.headerProfile
+	.col-md-8.profileCover
+		.col-md-3.col-md-offset-1
+			img(src="upload/{{ userInfo.username }}/profilePic.jpg",class="img-circle imgProfil")
+
+		.col-md-8.profilePres
+			h3 Profil de {{ userInfo.username }}
+			div
+				reverse-geocode(lat="{{userInfo.lat}}",lng="{{userInfo.lng}}")
+				button(ng-click="geolocation()") <i class="fa fa-paper-plane"></i> Me géolocaliser
+
+	.col-md-4.nopadding.menuDivContainer
+		.col-md-4.menuDiv
+			a(href="/profileCatalogue")
+				i.fa.fa-book
+				p Catalogue
+		.col-md-4.menuDiv
+			a(href="/profileEdit")
+				i.fa.fa-user.fa-3
+				p Mon profil
+		.col-md-4.menuDiv
+			a(href="/favorites")
+				i.fa.fa-star.fa-3
+				p Favoris
+		.col-md-4.menuDiv
+			a(href='/message')
+				i.fa.fa-weixin.fa-3
+				p Messages
+		.col-md-4.menuDiv
+			a(href='')
+				i.fa.fa-cog.fa-3
+				p Options
+		.col-md-4.menuDiv
+			a(href='')
+				i.fa.fa-question.fa-3
+				p Aide
+<br>
+.col-md-10.col-md-offset-1
+	h3 Avis a propos de {{userInfo.username}}
+	<br><br>
+	form(class='form', ng-submit='comment()')
+		.input-group
+			<span class="input-group-addon" id="basic-addon1"><i class="fa fa-comment"></i></span>
+			<input type="text" ng-model="form.commentaire" class="form-control" placeholder="écrivez un commentaire..." aria-describedby="basic-addon1">

@@ -2,6 +2,85 @@
 
 /* Controllers */
 
+// controller de la navbar
+function NavBarCtrl($scope, $http, $location, $cookieStore)
+{
+
+  if(!$scope.cart)
+  {
+
+    console.log($cookieStore);
+    if($cookieStore.get('cart'))
+    {
+      $scope.cart = $cookieStore.get('cart');
+    }
+    else
+    {
+      $scope.cart = [];
+    }
+
+  }
+
+  
+  // get friend requests
+  $http.get('/api/user/get/friendRequest').success(function(data, status, headers, config) {
+          $scope.invitations = data.invitations;
+  });
+
+  // get unread messages
+   $http.get('/api/user/get/unreadMessage').success(function(data, status, headers, config) {
+          $scope.unreadMessages = data.messages;
+  });
+
+
+  $scope.invitationAccept = function(user) {
+    $http.post('/api/user/friendRequest/accept/'+user).success(function(data) {
+            $scope.invitations = data.invitations;  
+    });
+  }
+
+  $scope.invitationRefuse = function(user) {
+    $http.post('/api/user/friendRequest/refuse/'+user).success(function(data) {
+            $scope.invitations = data.invitations;  
+    });
+  }
+
+  // suppression d'un item du panier 
+  $scope.deleteItem = function(id) {
+    // copie dans  un nouveau tableau sauf l'element a supprimer
+    var newCart = [];
+    for (var i = $scope.cart.length - 1; i >= 0; i--) {
+        if($scope.cart[i].id!=id) {
+          newCart.push($scope.cart[i]);
+        }
+      };
+
+      $scope.cart = newCart;
+      console.log('suppress -> '+newCart);
+      $cookieStore.put('cart',newCart);
+
+
+     
+  }
+
+  
+
+
+
+
+
+
+}
+
+function IndexCtrl($scope, $http) {
+
+   
+
+}
+
+
+
+
 function AppCtrl($scope, socket) {
 
   // Socket listeners

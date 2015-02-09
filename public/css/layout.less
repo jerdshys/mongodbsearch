@@ -1,5 +1,25 @@
+#canvas{
+	width : 300px;
+	height : 300px;
+	border : 1px solid white;
+
+}
 * { 
 	margin: 0; 
+}
+
+.notification
+{
+	margin-left: 5px;
+	height: 14px;
+	padding:1px;
+	padding-left: 5px;
+	padding-right: 5px;
+	border-radius: 9px;
+	font-size: 9px;
+	opacity:0.7;
+	background-color: red;
+	color: white;
 }
 
 .nopadding {
@@ -42,8 +62,13 @@ html, body
 
 body
 {
-	background-image : url('../img/background.jpg');
-	background-size:cover;
+	/*background-image : url('../img/background.jpg');
+	background-size:cover;*/
+
+	background-image : url('../img/bright_squares.png');
+	background-repeat:repeat;
+
+
 	font-family: 'Open Sans', sans-serif !important;
 }
 
@@ -105,7 +130,7 @@ body
 	height: 100%;
 	/*background: url('../img/bgbody.png') center center;*/
 
-	background-color: rgba(255,255,255,0.88);
+	background-color: rgba(255,255,255,0.4);
 	padding-bottom: 50px !important;
 
 }
@@ -142,7 +167,7 @@ body
 .title
 {
 	opacity : 1 !important;
-	background-color: rgba(0,127,14,0.8);
+	background-color: rgba(0,127,14,0.3);
 	padding: 13px;
 	padding-left: 25px;
 	color : white;
@@ -156,7 +181,9 @@ body
 {
 	background-color:  rgba(0,0,0,0.1) !important; 
 	padding: 0px !important;
-	padding-bottom: 60px !important;
+	padding-bottom: 20px !important;
+	color : grey;
+	border-radius: 12px;
 
 }
 
@@ -166,18 +193,45 @@ body
 	padding-right: 30px;
 	width: 100%;
 	float: left;
+	color : grey;
+
+	
+			label
+			{
+				color: white;
+				font-size: 10px;
+			}
+
+}
+
+.inputLogin
+{
+	background-color: rgba(255,255,255,0.4);
+	moz-border-radius: 10px !important;
+   -webkit-border-radius: 10px !important;
+    border-radius: 10px !important;
+	height: 40px;
+	color : black;
+
+}
+
+.inputLogin:focus
+{
+
+
 }
 
 .bandeau
 {
 	color : white;
-	background-color: rgba(63,166,116,0.9);
+	background-color: rgba(63,166,116,0.6);
 	text-align: center;
-	padding-bottom: 18px;
-	padding-top: 18px;
+	padding-bottom: 10px;
+	padding-top: 10px;
 	padding-right: 10px;
 	margin-bottom: 30px !important;
 	margin-top: 0px;
+
 }
 
 
@@ -219,7 +273,7 @@ body
 
 .menubutton:hover
 {
-	opacity: 0.8;
+	opacity: 0.9;
 	cursor: pointer;
 }
 
@@ -252,20 +306,6 @@ input[type="text"],input[type="password"]
 :-ms-input-placeholder { font-style: italic; font-size: 11px; } /* ie */
 input:-moz-placeholder { font-style: italic; font-size: 11px; }
 
-.menuDiv
-{
-	margin-top: 40px;
-	text-align: center;
-	cursor: pointer;
-
-}
-
-
-
-.menuDiv>a:hover
-{
-	color : black;
-}
 
 .center
 {
@@ -282,7 +322,7 @@ input:-moz-placeholder { font-style: italic; font-size: 11px; }
 	background-color: black;
 	color: white;
 	position: fixed;
-	padding-top: 100px;
+	padding-top: 0px;
 	border-left: 2px solid black;
 
 }
@@ -291,7 +331,7 @@ input:-moz-placeholder { font-style: italic; font-size: 11px; }
 {
 	padding : 15px;
 	padding-left: 5%;
-	background-color: rgba(0,0,0,0.6)
+	background-color: rgba(0,0,0,0.45)
 }
 
 .angular-google-map-container { height: 900px; }

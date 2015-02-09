@@ -1,0 +1,17 @@
+.paddingTop
+
+.col-md-11.col-md-offset-1
+	h4 Résumé de mon panier
+	<br>
+	<br>
+	li.col-md-12(ng-repeat="item in cart",style="margin-top : 10px;")
+		.col-md-9
+			{{item.name}}
+		.col-md-2(ng-click="deleteItem(item.id)") <i class="fa fa-close"></i>
+		.col-md-9(style="color:rgba(0,0,0,0.3);font-size:10px;padding-bottom:10px;border-bottom : 1px solid lightgrey;") qté : {{item.qty}} x {{item.prix}}&euro;
+	<br><br>
+	.col-md-3.col-md-offset-6(style="margin-top:80px")
+		.col-md-7 
+			h5 Total : {{ cart | cartTotal}}&euro;
+		.col-md-5
+			button(type="button",class="btn btn-danger") Acheter

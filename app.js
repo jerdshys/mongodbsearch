@@ -6,6 +6,7 @@ var express = require('express'),
   routes = require('./routes'),
   socket = require('./routes/socket'),
   api = require('./routes/api'),
+  apiFixture = require('./routes/apiFixture'),
   apiUser = require('./routes/apiUser'),
   mongoose = require('mongoose'),
   http = require('http'),
@@ -16,34 +17,24 @@ var express = require('express'),
   passportLocalMongoose = require('passport-local-mongoose');
 
 var Schema = mongoose.Schema;
-// require('./routes/database').make(Schema, mongoose);
 
 
-// var Account = new models.Account();
+
+// passportJS
+
+var UserInfo = require('./routes/schemas/UserInfo');
+
 var Account = new Schema({
     username: String,
-    password: String
-    
+    password: String   
 });
-
-var UserInfo = new Schema({
-    username: String,
-    profilePic : String,
-    description : String
-});
-
 
 Account.plugin(passportLocalMongoose);
 Account=mongoose.model('Account', Account);
-UserInfo= mongoose.model('UserInfo', UserInfo);
-//passport
+
 passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
-
-// mongoose
-//mongoose.connect('mongodb://localhost/passport_local_mongoose');
-
 
 mongoose.connect('mongodb://localhost/foodr');
 
@@ -58,8 +49,8 @@ db.once('open', function callback () {
 
 
 
-var app = module.exports = express.createServer();
 
+var app = module.exports = express.createServer();
 // Hook Socket.io into Express
 var io = require('socket.io').listen(app);
 
@@ -114,14 +105,39 @@ app.get('/partials/:name', routes.partials);
 
 // JSON API
 
+// load fixtures
+app.post('/load/fixtures',apiFixture.reload);
+
+// user
+app.get('/api/user/put', apiUser.putUser);
+app.get('/api/get/user/:name', api.getUser);
+
+//social
+app.post('/api/user/friendRequest/:name', api.friendRequest);
+app.post('/api/user/friendRequest/accept/:name', api.friendRequestAccept);
+app.post('/api/user/friendRequest/refuse/:name', api.friendRequestRefuse);
+app.get('/api/user/get/friendRequest', api.getFriendRequest);
+app.post('/api/user/message',api.message);
+app.get('/api/user/get/message/:name',api.getMessage);
+app.get('/api/user/get/unreadMessage',api.getUnreadMessage);
+
+// profile
+app.get('/api/user/get', api.getProfile);
+app.post('/api/user/geolocate', api.geolocateUser);
+app.post('/api/user/profilePic', api.profilePic);
+app.post('/api/user/description', api.editDescription);
+app.post('/api/user/gallerie', api.editGallerie);
+app.post('/api/user/favorite/:user/:food', api.addFavorite);
+
+//tags
+app.post('/api/tag/post',api.addTag);
+
+// food
 app.post('/api/post', api.addFood);
 app.get('/api/get', api.getFoods);
-
-app.get('/api/user/put', apiUser.putUser)
-app.get('/api/user/get', apiUser.getUser)
-
 app.get('/api/get/food/user', api.getFoodFromUser);
-app.get('/api/get/food/:id',api.getFood)
+app.get('/api/get/food/:id',api.getFood);
+app.get('/api/get/food/local/:lng/:lat',api.getLocalFood);
 
 
 app.get('/api/getTags', api.getTags);

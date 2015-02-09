@@ -1,6 +1,14 @@
-.paddingTop
-
-.col-md-12.col-md-offset-1
-	h3 Community
-	{{ users }}
-	div(class="col-md-3",ng-repeat="user in users") {{user}}
+.col-md-12.gallerie.nopadding
+	div(class="col-md-3 book nopadding",ng-repeat="item in users",style="opacity : 0.73;height:200px")
+		.hover
+			a(href="user/{{item.username}}")
+				<i class="fa fa-user"></i> Voir le profil
+		.gallerieThumbnail
+			.helper
+			img(src="upload/{{ item.username }}/profilePic.jpg", class="img-circle")
+		.userbook
+			{{ item.username }}
+			p Note <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+			<br>
+			h5 Catalogue
+			p(style="font-size:9px") pates carbonara(5eu)

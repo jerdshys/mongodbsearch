@@ -2,33 +2,47 @@
 
 div(ng-controller="AddFoodCtrl")
 	.col-md-10.col-md-offset-1
-		h4 Ajouter un nouvel item
-		form(class='form', ng-submit='addFood()')
-			label Nom
-			input(class='form-control', ng-model='form.nom', placeholder='nom',type="text")
-			label Description
-			textarea(class='form-control', ng-model='form.description', placeholder='description',ckeditor="editorOptions")
-			label Type
-			<br>
-			input(type="radio",name="type",ng-model="form.type",value="On demand")
-			span On Demand
-			<br>
-			input(type="radio",name="type",ng-model="form.type",value="On the run")
-			span On the run
-			<br>
-			input(type="radio",name="type",ng-model="form.type",value="Groceries")
-			span Groceries
-			<br>
-			label Tags
-			p Tags sélectionnés :
-			span(class="label label-success",ng-model='form.selectedTags',ng-repeat="selectedTag in form.selectedTags", ng-click="unselectTag(form.selectedTag)") {{ selectedTag }} x
+		.col-md-12.nopadding
+			h3 Ajouter un nouvel item
+			<br><br><br>
+		.col-md-7.nopadding
+			form(class='form', ng-submit='addFood()')
+				input(type='hidden',name='lat',value="{{userInfo.lat}}")
+				input(type='hidden',name='lng',value="{{userInfo.lng}}")
+				label Nom
+				input(class='form-control', ng-model='form.nom', placeholder='nom',type="text")
+				label Description {{form.description.length}}/150
+				textarea(class='form-control', ng-model='form.description', placeholder='description',ckeditor="editorOptions")
+				label Prix (<i class="fa fa-euro"></i>)
+				input(class='form-control', ng-model='form.prix', placeholder='prix',type='text',style='width : 60px')
+				label Type
+				<br>
+				input(type="radio",name="type",ng-model="form.type",value="On demand")
+				span &nbsp;A la demande
+				&nbsp;&nbsp;
+				input(type="radio",name="type",ng-model="form.type",value="On the run")
+				span &nbsp;Prêt à manger
+				&nbsp;&nbsp;
+				input(type="radio",name="type",ng-model="form.type",value="Groceries")
+				span &nbsp;Potager
+				<br><br>
+				label Image
+				input(type="file",title="",accept="image/*",fileread="form.file.src")
+				<br><br><br>
+				input(class='btn btn-default', type='submit', value='Ajouter')
+		.col-md-1
+		.col-md-4.nopadding
+			h5 Tags
+			span(class="label label-success",ng-model='selectedTags',ng-repeat="selectedTag in selectedTags", ng-click="unselectTag(form.selectedTag)") {{ selectedTag }} x
 			p
-				input(class='form-control', ng-model='form.tags',placeholder='chercher des tags',type="text")
-				button(ng-click="selectTag(form.tags)",class='btn btn-default pull-right') +
-			span(class="label label-success",ng-repeat="tag in tags | filter : form.tags | limitTo : 5", ng-click="selectTag(tag.name)") {{ tag.name }} ({{tag.popularity}})
-			<br>
-			label Image
-			input(type="file",title="",accept="image/*",fileread="form.file.src")
-			input(type="text",ng-model="form.file.src")
-			<br>
-			input(class='btn btn-default pull-right', type='submit', value='Ajouter')
+				input(class='form-control', ng-model='tag',placeholder='chercher des tags',type="text")
+				button(ng-click="selectTag(tag)",class='btn btn-default pull-right') +
+			span(class="label label-success",ng-repeat="tag in tags | filter : tag | limitTo : 5 | orderObjectBy:'popularity':true", ng-click="selectTag(tag.name)") {{ tag.name }} ({{tag.popularity}})
+			<br><br><br>
+			h5 Ingrédients
+			span(class="label label-success",ng-model='selectedIngredients',ng-repeat="selectedIngredient in selectedIngredients", ng-click="unselectIngredient(form.selectedIngredient)") {{ selectedIngredient }} x
+			p
+				input(class='form-control', ng-model='ingredient',placeholder='chercher des ingrédients',type="text")
+				button(ng-click="selectIngredient(ingredient)",class='btn btn-default pull-right') +
+			span(class="label label-success",ng-repeat="ingredient in ingredients | filter : ingredient | limitTo : 5", ng-click="selectIngredient(ingredient.name)") {{ ingredient.name }} ({{ingredient.popularity}})
+			

@@ -1,0 +1,69 @@
+.col-md-12.nopadding.headerProfile
+	.col-md-8.profileCover
+		.col-md-3.col-md-offset-1
+			img(src="upload/{{ user.username }}/profilePic.jpg",class="img-circle",style="width: 110px; height : 100px;margin-top:3px;")
+
+		.col-md-8.profilePres
+			h3 Profil de {{ user.username }}
+			div
+				reverse-geocode(lat="{{userInfo.lat}}",lng="{{userInfo.lng}}")
+				button(ng-click="geolocation()") <i class="fa fa-paper-plane"></i> Me géolocaliser
+
+	.col-md-4.nopadding.menuDivContainer
+		.col-md-4.menuDiv
+			a(href="/profileCatalogue")
+				i.fa.fa-book
+				p Catalogue
+		.col-md-4.menuDiv
+			a(href="/profileEdit")
+				i.fa.fa-user.fa-3
+				p Mon profil
+		.col-md-4.menuDiv
+			a(href="/favorites")
+				i.fa.fa-star.fa-3
+				p Favoris
+		.col-md-4.menuDiv
+			a(href='/message')
+				i.fa.fa-weixin.fa-3
+				p Messages
+		.col-md-4.menuDiv
+			a(href='')
+				i.fa.fa-cog.fa-3
+				p Options
+		.col-md-4.menuDiv
+			a(href='')
+				i.fa.fa-question.fa-3
+				p Aide
+
+.col-md-6.col-md-offset-1(style="padding-top:25px;")
+	h4 Modifiez votre description
+	form(class='form', ng-submit='editDescription()')
+		textarea(rows="8",cols="60",ng-model="formDescription.description",textAngular)
+		<br>
+		input(type="submit",value="valider")
+
+.col-md-5(style="padding-top:25px;border-left:1px solid rgba(255,255,255,0.7);")
+	h4 Photo de profil
+	form(class="form",ng-submit="profilePic()")
+			</br>
+			input(type="file",title="",accept="image/*",fileread="form.file.src",style="display:inline !important;")
+			</br>
+			input(type="submit",class="bt btn-default",value="Changer la photo de profil")
+	<br><br><br>
+	h4 Mes photos
+	form(class="form", ng-submit="editGallerie()")
+		<br/>
+		label photo n°1
+		<br/>
+		input(type="file",title="",accept="image/*",fileread="formFile.file1.src",style="display:inline !important;")
+		<br/>
+		label photo n°2
+		<br/>
+		input(type="file",title="",accept="image/*",fileread="formFile.file2.src",style="display:inline !important;")
+		<br/>
+		label photo n°3
+		<br/>
+		input(type="file",title="",accept="image/*",fileread="formFile.file3.src",style="display:inline !important;")
+		<br><br>
+		input(type="submit",value="valider")
+
