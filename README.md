@@ -1,7 +1,7 @@
-# Foodr #
+# mhmj #
 
 ## Getting Started ##
 
-* git clone 
+* git clone
 * npm install
 * bower install
