@@ -1,0 +1,20 @@
+.row
+  .col-md-12.logoContainer
+    img.logo(src='img/logo.png')
+.row
+  .col-md-2.col-md-offset-5.addContainer
+    | <br>
+    h3 Ajouter un produit
+    form.form-horizontal
+      .form-group
+        label(for='exampleInputEmail1') Name
+        input#exampleInputEmail1.form-control(type='Name', placeholder='Name',ng-model="form.name",required)
+      .form-group
+        label(for='exampleInputEmail1') Price
+        input#exampleInputEmail1.form-control(type='Price', placeholder='Price',ng-model="form.prix",required)
+      button.btn.btn-success(type='button',ng-click="add()") add new item
+      | &nbsp;&nbsp;
+      a(href="/",class="btn btn-primary",role="button")
+        | <
+      | <br>
+      p(ng-show="ajout",style="color:green") item ajouté

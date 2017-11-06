@@ -1,121 +1,27 @@
-doctype html
 html(ng-app="myApp")
   head
     meta(charset='utf8')
     base(href='/')
-    title Foodr
-    link(href='http://fonts.googleapis.com/css?family=Open+Sans',rel='stylesheet',type='text/css')
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    title Recherche
 
     link(rel='stylesheet', href='/css/app.css')
     link(rel='stylesheet', href='/css/pace.css')
-    
     link(rel='stylesheet', href='/css/style.css')
-
-    link(rel="stylesheet",type="text/css",href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css")
     link(href="css/jquery.tagit.css",rel="stylesheet",type="text/css")
-
 
     script(src='/css/pace.min.js')
     script(src='jquery/dist/jquery.js')
     script(src='js/lib/angular/angular.js')
-
-    script(src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js",type="text/javascript",charset="utf-8")
-    link(rel="stylesheet",type="text/css",href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css")
-    script(type="text/javascript",src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBWdLzwiRds1-FAiO1xi--5uFZmoAxHHkI")
-    
-    // google maps
-    //- script.
-    //-     function initialize() {
-    //-         var mapOptions = {
-    //-             center: { lat: -34.397, lng: 150.644},
-    //-             zoom: 8
-    //-         };
-    //-         var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
-    //-     }
-    //-     google.maps.event.addDomListener(window, 'load', initialize);
-
-
-
-    script.
-        (function($){
-            $(window).load(function(){
-                $(".frame").mCustomScrollbar();
-            });
-        })(jQuery);
-    script.
-        var passport = {};
-        passport.user = (!{JSON.stringify(user)});
-    
-   
     script(src='/bootstrap/dist/js/bootstrap.js')
-    script(src='/ng-file-upload/angular-file-upload.js') 
-    script(src='/socket.io/socket.io.js')
-    script(src='/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js')
-    
-    script(src='/angular-cookies/angular-cookies.js')
-
-        
-    // google maps
-    script(src='/lodash/dist/lodash.min.js')
-    script(src='/angular-google-maps/dist/angular-google-maps.min.js')
-    script(src='/angular-reverse-geocode/angular-reverse-geocode.js')
-    script(type="text/javascript",src='/angularjs-geolocation/dist/angularjs-geolocation.min.js')
-    script(type="text/javascript",src="/angular-ui-utils/ui-utils.js")
-    
-    // text editor
-    //- script(type="text/javascript",src='/textAngular/dist/textAngular-rangy.min.js')
-    //- script(type="text/javascript",src='/textAngular/dist/textAngular-sanitize.min.js')
-    //- script(type="text/javascript",src='/textAngular/dist/textAngular.min.js')
-
- 
-
-
     script(src='js/app.js')
-    script(src='js/services.js')
-    script(src='js/controllers.js')
-    script(src='js/controllers/auth.js')
-    script(src='js/controllers/food.js')
-    script(src='js/controllers/users.js')
-    script(src='js/filters.js')
-    script(src='js/directives.js')
+    script(src='js/controllers/search.js')
+    script(src='js/controllers/add.js')
 
-    script(src="//localhost:35729/livereload.js")
+
 
   body
-    div#wrapper(ng-controller="NavBarCtrl")
-        include navbar.jade
-        div.col-md-12.nopadding#content
-            .leftbar.nopadding
-                .bgmenu
-                .menu
-                    .logo 
-                        img(src="img/logo.png")
-                        .col-md-12.menubutton 
-                            i.fa.fa-home 
-                            span &nbsp;
-                                a(href="/") Accueil
-                        .col-md-12.menubutton 
-                            i.fa.fa-book
-                            span &nbsp;
-                                a(href="/catalogue") Catalogue
-                        .col-md-12.menubutton
-                            i.fa.fa-users
-                            span &nbsp;
-                                a(href="/community") Communauté
-                        if(user)
-                            .col-md-12.menubutton
-                                i.fa.fa-user
-                                span &nbsp;
-                                    a(href="/profile") Mon compte
-                //- <br><br>
-                //- .col-md-12(style="text-align:center;margin-top:110px;color:white;font-size:9px;background-color:rgba(0,0,0,0.25)")
-                //-     .col-md-4
-                //-         i.fa.fa-bar-chart(style="font-size:15px;margin-top: 15px")
-                //-     .col-md-8(style="padding-top:6px;")
-                //-         p 8745 utilisateurs connectés <br> 133792 plats <br> 1298 prêts à consommer
-
-            .frame.nopadding.mCustomScrollbar
+    div#wrapper
+        div.col-md-12.nopadding
+            .nopadding
                 .bg
                 block body
-
