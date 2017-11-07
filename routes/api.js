@@ -1,6 +1,10 @@
 var mongoose = require('mongoose'),
+<<<<<<< HEAD
     Schema = mongoose.Schema,
     request = require('request');
+=======
+    Schema = mongoose.Schema;
+>>>>>>> 1493f77fce6f0abf166a569260f4a4978dafe602
 
 
 
@@ -111,17 +115,36 @@ exports.searchRemoteManual = function(req,res) {
     }
   );
 }
+//
+// exports.searchRemote =function(req,res){
+//   var query = {  "term" : { "name" : req.params.search } };
+//   var tab= [];
+//   Item.search(query, function (err, items) {
+//     if (err) {
+//         throw err;
+//     }else{
+//       console.log(items)
+//         console.log(items.hits.hits);
+//         tab= tab.concat(items.hits.hits);
+//         console.log('Tab',tab)
+//         res.json({
+//           tab : tab
+//         });
+//     }
 
-exports.searchRemote =function(req,res){
-  var query = {  "term" : { "name" : req.params.search } };
+
+
+exports.searchRemote=function(req,res){
+  var query = {
+              "term" : { "name" : req.params.search }
+  }
+
   var tab= [];
   Item.search(query, function (err, items) {
     if (err) {
         throw err;
     }else{
-      console.log(items)
-        console.log(items.hits.hits);
-        tab= tab.concat(items.hits.hits);
+        tab=tab.concat(items.hits.hits);
         console.log('Tab',tab)
         res.json({
           tab : tab
