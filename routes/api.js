@@ -1,7 +1,5 @@
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema,
-    http = require('http'),
-    request = require('request');
+    Schema = mongoose.Schema;
 
 
 
@@ -73,63 +71,24 @@ exports.addSuperMarche = function (req, res) {
   });
 }
 
-exports.search = function(req,res) {
-    var tab = [];
-    SuperMarche.find({ name : new RegExp(req.params.search, 'i')}).limit(15).exec( function(err, supermarches) {
-      if(err) {
+
+
+
+exports.search=function(req,res){
+  var query = {
+              "term" : { "name" : req.params.search }
+  }
+
+  var tab= [];
+  Item.search(query, function (err, items) {
+    if (err) {
         throw err;
-      } else {
-
-        Item.find({name :  new RegExp(req.params.search, 'i')}).limit(15).exec( function(err,items) {
-          if(err) {
-            throw err;
-          } else {
-            var tab = supermarches.concat(items);
-            res.json({
-              tab : tab
-            });
-          }
-      });
+    }else{
+        var tab=tab.concat(items.hits.hits);
+        console.log('Tab',tab)
+        res.json({
+          tab : tab
+        });
     }
-    });
-}
-
-exports.searchRemote = function(req,res) {
-  var r = res;
-
-  request.post(
-    'http://localhost:9200/test/items/_search',
-    { json: { "query": { "term": { "name": req.params.search }} }},
-    function (error, response, body) {
-        if (!error) {
-            console.log("body",body)
-            console.log(body.data)
-            r.json({
-              tab : body.hits.hits
-            });
-        }
-        else {
-          console.log("error",error)
-        }
-    }
-);
-  // var r = res;
-  // http.get({
-  //   hostname: 'localhost',
-  //   port : 9200,
-  //   path: '/test/items/_search?'+req.params.search
-  // }, (res) => {
-  //   let data ='';
-  //   res.on('data', (chunk) => {
-  //     data += chunk;
-  //   });
-  //   res.on('end', () => {
-  //       console.log(data);
-  //       r.json({
-  //         tab : data
-  //       });
-  //     });
-  //
-  //   // Do stuff with response
-  // });
+});
 }
