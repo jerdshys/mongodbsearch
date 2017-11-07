@@ -5,6 +5,7 @@
   "dependencies": {
     "bson": "^1.0.4",
     "connect-multiparty": "^1.2.5",
+    "cors": "^2.8.4",
     "ejs": "^2.5.7",
     "express": "^2.5.10",
     "font-awesome": "^4.2.0",

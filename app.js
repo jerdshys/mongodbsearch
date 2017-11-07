@@ -6,7 +6,8 @@ var express = require('express'),
   routes = require('./routes'),
   mongoose = require('mongoose'),
   api= require('./routes/api'),
-  jade = require('jade');
+  jade = require('jade'),
+  cors = require('cors');
 
 var Schema = mongoose.Schema;
 
@@ -70,9 +71,8 @@ app.configure('production', function(){
 app.get('/partials/:name', routes.partials);
 app.post('/api/item', api.addItem);
 app.post('/api/supermarche', api.addSuperMarche);
-
-
 app.get('/api/search/:search?', api.search);
+app.get('/api/search/remote/:search?', api.searchRemote);
 // app.get('/api/search/', api.search);
 
 

@@ -9,11 +9,19 @@
       a(href="/add",class="btn btn-primary",role="button")
         | +
 .row
-    .col-md-6.col-md-offset-3.resultContainer
+    .col-md-5.resultContainer
       .col-md-12(ng-show="search.length>0")
         | {{supermarches.length}} résultats trouvés pour "{{ search }}"
       .col-md-12.resultCart(ng-repeat='item in supermarches | filter:search', style='width:100%;background : white')
         span
           {{ item.name }}
+        span.pull-right
+          {{item.prix}}€
+    .col-md-5.col-md-offset-2.resultContainer
+      .col-md-12(ng-show="search.length>0")
+        | {{remoteSupermarches.length}} résultats trouvés pour "{{ search }}"
+      .col-md-12.resultCart(ng-repeat='item in remoteSupermarches | filter:search', style='width:100%;background : white')
+        span
+          {{ item }}
         span.pull-right
           {{item.prix}}€

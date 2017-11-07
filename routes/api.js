@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+    http = require('http');
 
 
 
@@ -73,20 +74,16 @@ exports.addSuperMarche = function (req, res) {
 
 exports.search = function(req,res) {
     var tab = [];
-    console.log("query search for "+req.params.search)
     SuperMarche.find({ name : new RegExp(req.params.search, 'i')}).limit(15).exec( function(err, supermarches) {
       if(err) {
         throw err;
       } else {
 
-        console.log('USERINFOS', supermarches)
         Item.find({name :  new RegExp(req.params.search, 'i')}).limit(15).exec( function(err,items) {
           if(err) {
             throw err;
           } else {
-            console.log('MEDIAOBJECTs', items)
             var tab = supermarches.concat(items);
-            console.log('TAB', tab)
             res.json({
               tab : tab
             });
@@ -94,4 +91,26 @@ exports.search = function(req,res) {
       });
     }
     });
+}
+
+exports.searchRemote = function(req,res) {
+  var r = res;
+  http.get({
+    hostname: 'localhost',
+    port : 9200,
+    path: '/test/items/AV-WoEIu5uQttXAtyJVO',
+  }, (res) => {
+    let data ='';
+    res.on('data', (chunk) => {
+      data += chunk;
+        });
+    res.on('end', () => {
+        console.log(JSON.parse(data)._source);
+        r.json({
+          tab : JSON.parse(data)._source
+        });
+      });
+
+    // Do stuff with response
+  });
 }
