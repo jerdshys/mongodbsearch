@@ -12,9 +12,27 @@
       .form-group
         label(for='exampleInputEmail1') Price
         input#exampleInputEmail1.form-control(type='Price', placeholder='Price',ng-model="form.prix",required)
-      button.btn.btn-success(type='button',ng-click="add()") add new item
+      button.btn.btn-success(type='button',ng-click="addItem()") add new item
       | &nbsp;&nbsp;
       a(href="/",class="btn btn-primary",role="button")
         | <
       | <br>
       p(ng-show="ajout",style="color:green") item ajouté
+      | <hr>
+.row
+  .col-md-2.col-md-offset-5.addContainer
+    | <br>
+    h3 Ajouter un supermarché
+    form.form-horizontal
+      .form-group
+        label(for='exampleInputEmail1') Name
+        input#exampleInputEmail1.form-control(type='Name', placeholder='Name',ng-model="form2.name",required)
+      .form-group
+        label(for='exampleInputEmail1') Price
+        input#exampleInputEmail1.form-control(type='Price', placeholder='Price',ng-model="form2.prix",required)
+      button.btn.btn-success(type='button',ng-click="addSuperMarche()") add new item
+      | &nbsp;&nbsp;
+      a(href="/",class="btn btn-primary",role="button")
+        | <
+      | <br>
+      p(ng-show="ajout",style="color:green") supermarché ajouté

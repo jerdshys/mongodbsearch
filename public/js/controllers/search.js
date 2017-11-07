@@ -18,6 +18,11 @@ function SearchCtrl($scope, $http, $location, $filter)
         console.log('RESPONSE', response.data.tab)
         $scope.supermarches = response.data.tab;
       });
+      // $http.get('localhost:9200/twitter/tweet/'+$scope.search).then(function(response) {
+      //   $scope.supermarches = response.data;
+      // });
+
+
     }
 
 
