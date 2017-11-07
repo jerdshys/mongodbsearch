@@ -1,6 +1,5 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    http = require('http'),
     request = require('request');
 
 
@@ -27,10 +26,7 @@ exports.addFood = function (req, res) {
 	console.log('add food serveur : '+req.body.nom+' ');
 	// enregistrement du user
 	var location = [req.body.lng,req.body.lat];
-
 	// tags : req.body.selectedTags,
-
-
   var nutella= new Item({name:'Nutella', prix: 3.82});
   var crepe= new Item({name:'crepe', prix: 5.00});
   var newSuperMarche = new SuperMarche({name:'SuperSuper',  loc: [49.038074,2.081550], items : [nutella._id]});
@@ -60,7 +56,8 @@ exports.addItem = function (req, res) {
 
 exports.addSuperMarche = function (req, res) {
   var r =res;
-  console.log('add SuperMarche serveur : '+req.body.nom+' ');
+  console.log('add SuperMarche serveur : '+req.body.nom+' '
+);
   var location = [req.body.lng,req.body.lat];
   var supermarche = new SuperMarche({name:req.body.name ,  loc: location});
   supermarche.save(function (err,supermarche) {
@@ -73,33 +70,35 @@ exports.addSuperMarche = function (req, res) {
   });
 }
 
+
 exports.search = function(req,res) {
     var tab = [];
-    SuperMarche.find({ name : new RegExp(req.params.search, 'i')}).limit(15).exec( function(err, supermarches) {
-      if(err) {
-        throw err;
-      } else {
+    // SuperMarche.find({ name : new RegExp(req.params.search, 'i')}).limit(15).exec( function(err, supermarches) {
+    //   if(err) {
+    //     throw err;
+    //   } else {
 
         Item.find({name :  new RegExp(req.params.search, 'i')}).limit(15).exec( function(err,items) {
           if(err) {
             throw err;
           } else {
-            var tab = supermarches.concat(items);
+            // var tab = supermarches.concat(items);
             res.json({
-              tab : tab
+              tab : items
             });
           }
       });
-    }
-    });
+    // }
+    // });
 }
 
-exports.searchRemote = function(req,res) {
+exports.searchRemoteManual = function(req,res) {
+
   var r = res;
 
   request.post(
     'http://localhost:9200/test/items/_search',
-    { json: { "query": { "term": { "name": req.params.search }} }},
+    { json: { "query": { "regexp": { "name": ".*"+req.params.search+".*" }} }},
     function (error, response, body) {
         if (!error) {
             console.log("body",body)
@@ -113,23 +112,22 @@ exports.searchRemote = function(req,res) {
         }
     }
 );
-  // var r = res;
-  // http.get({
-  //   hostname: 'localhost',
-  //   port : 9200,
-  //   path: '/test/items/_search?'+req.params.search
-  // }, (res) => {
-  //   let data ='';
-  //   res.on('data', (chunk) => {
-  //     data += chunk;
-  //   });
-  //   res.on('end', () => {
-  //       console.log(data);
-  //       r.json({
-  //         tab : data
-  //       });
-  //     });
-  //
-  //   // Do stuff with response
-  // });
+}
+
+exports.searchRemote =function(req,res){
+  var query =  { "regexp": { "name": ".*"+req.params.search+".*" }}
+  var tab= [];
+  Item.search(query, function (err, items) {
+    if (err) {
+        throw err;
+    }else{
+      console.log(items)
+        console.log(items.hits.hits);
+        tab= tab.concat(items.hits.hits);
+        console.log('Tab',tab)
+        res.json({
+          tab : tab
+        });
+    }
+});
 }

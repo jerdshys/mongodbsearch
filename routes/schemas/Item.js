@@ -1,10 +1,13 @@
-var mongoose = require('mongoose')
-, Schema = mongoose.Schema
-, ObjectId = Schema.ObjectId;
+var mongoose = require('mongoose'),
+ Schema = mongoose.Schema,
+ mongoosastic = require('mongoosastic'),
+ elasticsearch = require('elasticsearch'),
+ esClient = new elasticsearch.Client({host: 'localhost:9200'}),
+ ObjectId = Schema.ObjectId;
 
 var MongooseArray = require('mongoose/lib/types/array');
 
-var Item = new Schema({
+var ItemSchema = new Schema({
 	name: String,
 	prix: String,
 	// loc: {
@@ -13,5 +16,29 @@ var Item = new Schema({
   //   }
 })
 
+ItemSchema.plugin(mongoosastic, {
+  esClient: esClient,
+  log: 'trace'
+});
 
-module.exports = mongoose.model('Item', Item);
+// ItemSchema.plugin(mongoosastic);
+var Item = mongoose.model('Item',ItemSchema);
+
+
+
+
+
+Item.createMapping({
+  "analysis" : {
+    "analyzer":{
+      "content":{
+        "type":"custom",
+        "tokenizer":"whitespace"
+      }
+    }
+  }
+},function(err, mapping){
+  // do neat things here
+});
+
+module.exports = Item;
