@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    http = require('http');
+    http = require('http'),
+    request = require('request');
 
 
 
@@ -95,22 +96,40 @@ exports.search = function(req,res) {
 
 exports.searchRemote = function(req,res) {
   var r = res;
-  http.get({
-    hostname: 'localhost',
-    port : 9200,
-    path: '/test/items/AV-WoEIu5uQttXAtyJVO',
-  }, (res) => {
-    let data ='';
-    res.on('data', (chunk) => {
-      data += chunk;
-        });
-    res.on('end', () => {
-        console.log(JSON.parse(data)._source);
-        r.json({
-          tab : JSON.parse(data)._source
-        });
-      });
 
-    // Do stuff with response
-  });
+  request.post(
+    'http://localhost:9200/test/items/_search',
+    { json: { "query": { "term": { "name": req.params.search }} }},
+    function (error, response, body) {
+        if (!error) {
+            console.log("body",body)
+            console.log(body.data)
+            r.json({
+              tab : body.hits.hits
+            });
+        }
+        else {
+          console.log("error",error)
+        }
+    }
+);
+  // var r = res;
+  // http.get({
+  //   hostname: 'localhost',
+  //   port : 9200,
+  //   path: '/test/items/_search?'+req.params.search
+  // }, (res) => {
+  //   let data ='';
+  //   res.on('data', (chunk) => {
+  //     data += chunk;
+  //   });
+  //   res.on('end', () => {
+  //       console.log(data);
+  //       r.json({
+  //         tab : data
+  //       });
+  //     });
+  //
+  //   // Do stuff with response
+  // });
 }

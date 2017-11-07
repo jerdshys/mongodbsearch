@@ -21,7 +21,7 @@ function SearchCtrl($scope, $http, $location, $filter)
       });
 
       $http.get('/api/search/remote/'+$scope.search).then(function(response) {
-        $scope.remoteSupermarches = response.data;
+        $scope.remoteSupermarches = response.data.tab;
       });
     }
 
