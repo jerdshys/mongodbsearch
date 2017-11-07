@@ -93,9 +93,7 @@ exports.search = function(req,res) {
 }
 
 exports.searchRemoteManual = function(req,res) {
-
   var r = res;
-
   request.post(
     'http://localhost:9200/test/items/_search',
     { json: { "query": { "regexp": { "name": ".*"+req.params.search+".*" }} }},
@@ -111,11 +109,11 @@ exports.searchRemoteManual = function(req,res) {
           console.log("error",error)
         }
     }
-);
+  );
 }
 
 exports.searchRemote =function(req,res){
-  var query =  { "regexp": { "name": ".*"+req.params.search+".*" }}
+  var query = {  "term" : { "name" : req.params.search } };
   var tab= [];
   Item.search(query, function (err, items) {
     if (err) {
