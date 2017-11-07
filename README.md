@@ -6,3 +6,4 @@
 * ( sudo npm install bower -g)
 * npm install
 * bower install
+* node app.js
