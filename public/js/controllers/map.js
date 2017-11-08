@@ -2,15 +2,16 @@ function initialize() {
     console.log('init...');
     //loadScript();
 
-    var uluru = {lat: -25.363, lng: 131.044};
+    var myCenter = new google.maps.LatLng(42.519306,18.362231);
     var mapProp = {
-        center:uluru,
-        zoom:18
+        center:myCenter,
+        zoom:18,
+        mapTypeId:google.maps.MapTypeId.HYBRID
     };
 
-    var map=   google.maps.Map(document.getElementById("map"),mapProp);
+    var map= new google.maps.Map(document.getElementById("map"),mapProp);
 
-    var marker=  google.maps.Marker({
+    var marker=new google.maps.Marker({
         position:myCenter,
         animation: google.maps.Animation.BOUNCE
     });

@@ -42,7 +42,7 @@ exports.addItem = function (req, res) {
     var r = res;
      var item = new Item({name : req.body.name, prix : req.body.prix, loc: {
          type: "Point",
-         coordinates: [-73.97, 40.77]
+         coordinates: [req.body.lat, req.body.long]
      }});
      console.log('ITEM', item)
      item.save(function (err,item) {
@@ -150,4 +150,24 @@ exports.searchRemote=function(req,res){
         });
     }
 });
+}
+
+exports.searchLocal = function(req,res) {
+  if(req.body.lat.length === 0 || req.body.long.length === 0 ) {
+    return res.json(500, err);
+  }
+
+  Item.find({ loc: { '$near': {
+        '$maxDistance': 100000,
+        '$geometry': { type: 'Point', coordinates: [ req.body.lat, req.body.long ] } } }
+    }).limit(20).exec(function(err, items) {
+      console.log('ITEMS', items)
+      if (err) {
+        return res.json(500, err);
+      }
+
+      res.json({tab : items});
+    });
+
+
 }

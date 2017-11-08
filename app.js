@@ -73,6 +73,10 @@ app.post('/api/item', api.addItem);
 app.post('/api/supermarche', api.addSuperMarche);
 app.get('/api/search/:search?', api.search);
 app.get('/api/search/remote/:search?', api.searchRemoteManual); // methode manuelle sans lib
+app.post('/api/search/loc', api.searchLocal);
+
+
+
 // app.get('/api/search/remote/:search?', api.searchRemote); // avec lib
 // app.get('/api/search/', api.search);
 

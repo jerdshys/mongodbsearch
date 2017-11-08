@@ -14,6 +14,13 @@ function SearchCtrl($scope, $http, $location, $filter)
       $scope.remoteSupermarches = response.data.tab;
     });
 
+
+    $scope.searchNear = function() {
+      $http.post('/api/search/loc',{ lat : $scope.user.lat, long :$scope.user.long}).then(function(response) {
+          $scope.supermarches = response.data.tab
+      });
+    }
+
     // $http.get('/api/search/remote/'+$scope.search).then(function(response) {
     //   $scope.remoteSupermarches = response.data;
     // });
@@ -39,9 +46,7 @@ function SearchCtrl($scope, $http, $location, $filter)
     function showPosition(position) {
         $scope.user.lat = position.coords.latitude;
         $scope.user.long = position.coords.longitude;
-        alert(position.coords.latitude)
         $scope.$apply();
-
     }
 
     getLocation();
