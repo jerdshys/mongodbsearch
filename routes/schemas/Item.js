@@ -3,6 +3,7 @@ var mongoose = require('mongoose')
 , Schema = mongoose.Schema
 , ObjectId = Schema.ObjectId
 ,mongoosastic = require('mongoosastic'),
+elasticsearch = require('elasticsearch'),
 esClient = new elasticsearch.Client({host: 'localhost:9200'});
 
 var MongooseArray = require('mongoose/lib/types/array');
@@ -10,17 +11,25 @@ var MongooseArray = require('mongoose/lib/types/array');
 var ItemSchema = new Schema({
 	name: {type:String, es_indexed:true},
 	prix: String,
+	loc: {
+        type: { type: String },
+        coordinates: [Number],
+    }
 	// loc: {
   //   	type: [Number],  // [<longitude>, <latitude>]
   //   	index: '2d'      // geospatial index mongoose
   //   }
 })
-var Item = mongoose.model('Item',ItemSchema);
+
+ ItemSchema.index( { loc : "2dsphere" } )
 
 
-Item.plugin(mongoosastic, {
+ItemSchema.plugin(mongoosastic, {
   esClient: esClient
 })
+
+var Item = mongoose.model('Item',ItemSchema);
+
 
 Item.createMapping(function(err, mapping){
   if(err){

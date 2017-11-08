@@ -8,31 +8,19 @@
     form.form-horizontal
       .form-group
         label(for='exampleInputEmail1') Name
-        input#exampleInputEmail1.form-control(type='Name', placeholder='Name',ng-model="form.name",required)
+        input#exampleInputEmail1.form-control(type='text', placeholder='Name',ng-model="form.name",required)
       .form-group
         label(for='exampleInputEmail1') Price
-        input#exampleInputEmail1.form-control(type='Price', placeholder='Price',ng-model="form.prix",required)
+        input#exampleInputEmail1.form-control(type='number', placeholder='Price',ng-model="form.prix",required)
+      .form-group
+        label(for='exampleInputEmail1') Lat
+        input#exampleInputEmail1.form-control(type='number', placeholder='Lat',ng-model="form.lat",required)
+      .form-group
+        label(for='exampleInputEmail1') Long
+        input#exampleInputEmail1.form-control(type='number', placeholder='Long',ng-model="form.long",required)
       button.btn.btn-success(type='button',ng-click="addItem()") add new item
       | &nbsp;&nbsp;
       a(href="/",class="btn btn-primary",role="button")
         | <
       | <br>
       p(ng-show="ajout",style="color:green") item ajouté
-      | <hr>
-.row
-  .col-md-2.col-md-offset-5.addContainer
-    | <br>
-    h3 Ajouter un supermarché
-    form.form-horizontal
-      .form-group
-        label(for='exampleInputEmail1') Name
-        input#exampleInputEmail1.form-control(type='Name', placeholder='Name',ng-model="form2.name",required)
-      .form-group
-        label(for='exampleInputEmail1') Price
-        input#exampleInputEmail1.form-control(type='Price', placeholder='Price',ng-model="form2.prix",required)
-      button.btn.btn-success(type='button',ng-click="addSuperMarche()") add new item
-      | &nbsp;&nbsp;
-      a(href="/",class="btn btn-primary",role="button")
-        | <
-      | <br>
-      p(ng-show="ajout",style="color:green") supermarché ajouté

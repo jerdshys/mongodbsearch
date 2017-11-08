@@ -1,10 +1,6 @@
 var mongoose = require('mongoose'),
-<<<<<<< HEAD
     Schema = mongoose.Schema,
     request = require('request');
-=======
-    Schema = mongoose.Schema;
->>>>>>> 1493f77fce6f0abf166a569260f4a4978dafe602
 
 
 
@@ -44,7 +40,10 @@ exports.addItem = function (req, res) {
   console.log('REQ.BODY', req.body)
     console.log("add item")
     var r = res;
-     var item = new Item({name : req.body.name, prix : req.body.prix});
+     var item = new Item({name : req.body.name, prix : req.body.prix, loc: {
+         type: "Point",
+         coordinates: [-73.97, 40.77]
+     }});
      console.log('ITEM', item)
      item.save(function (err,item) {
         console.log('---------------------------item', item);
