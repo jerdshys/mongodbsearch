@@ -6,18 +6,20 @@ function SearchCtrl($scope, $http, $location, $filter)
 {
   $scope.user = {};
 
+
     //$scope.supermarches = ["auchan","carrouf","intermarché","attac","epicerie","simply market","super super"];
     $scope.search ="";
 
-    $http.get('/api/search/'+$scope.search).then(function(response) {
+    $http.get('/api/search/'+$scope.search).then(function(response) {    $scope.radius = 200;
       $scope.supermarches = response.data.tab;
-      $scope.remoteSupermarches = response.data.tab;
     });
 
 
     $scope.searchNear = function() {
-      $http.post('/api/search/loc',{ lat : $scope.user.lat, long :$scope.user.long}).then(function(response) {
+      $http.post('/api/search/loc',{ lat : $scope.user.lat, long :$scope.user.long, radius : $scope.radius*1000}).then(function(response) {
           $scope.supermarches = response.data.tab
+          loadScript($scope.supermarches,$scope.user);
+
       });
     }
 

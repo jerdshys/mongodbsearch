@@ -2,10 +2,11 @@
   .col-md-12.logoContainer
     img.logo(src='img/logo.png')
 .row
-  .col-md-12(style="background : grey;color:white;margin-top : 10px;")
+  .col-md-12(style="background : grey;color:grey;margin-top : 10px;")
     span.pull-right
       {{user}}
       button.btn.btn-success(ng-click="searchNear()",type='button') Find nearby
+      input(type='number',ng-model="radius")
 .row
   .col-md-6.col-md-offset-3.searchContainer
     .form-group
@@ -31,4 +32,4 @@
         span.pull-right
           {{item._source.prix }}€
     .col-md-6
-      | <div id="map"></div>
+      #map

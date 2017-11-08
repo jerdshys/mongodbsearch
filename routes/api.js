@@ -158,7 +158,7 @@ exports.searchLocal = function(req,res) {
   }
 
   Item.find({ loc: { '$near': {
-        '$maxDistance': 100000,
+        '$maxDistance': req.body.radius,
         '$geometry': { type: 'Point', coordinates: [ req.body.lat, req.body.long ] } } }
     }).limit(20).exec(function(err, items) {
       console.log('ITEMS', items)
