@@ -4,7 +4,8 @@
 .row
   .col-md-12(style="background : grey;color:grey;margin-top : 10px;")
     span.pull-right
-      {{user}}
+      span(style='color:white')
+        | Coords utilisateur {{user}}
       button.btn.btn-success(ng-click="searchNear()",type='button') Find nearby
       input(type='number',ng-model="radius")
 .row
@@ -30,6 +31,6 @@
         span
             {{ item._source.name }}
         span.pull-right
-          {{item._source.prix }}€
+          {{item._source.loc.coordinates[0] }} / {{item._source.loc.coordinates[1] }}
     .col-md-6
       #map

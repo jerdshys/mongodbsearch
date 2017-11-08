@@ -10,7 +10,8 @@
     "express": "^2.5.10",
     "font-awesome": "^4.2.0",
     "jade": "^1.11.0",
-    "mongoose": "^4.13.0"
+    "mongoose": "^4.13.0",
+    "response-time": "^2.3.2"
   },
   "devDependencies": {
     "bootstrap": "0.0.2",

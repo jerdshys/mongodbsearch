@@ -8,7 +8,7 @@ function initialize() {
     var myCenter = new google.maps.LatLng(user.lat,user.long);
     var mapProp = {
         center:myCenter,
-        zoom:8,
+        zoom:2,
         mapTypeId: google.maps.MapTypeId.HYBRID
     };
 
@@ -19,7 +19,8 @@ function initialize() {
       var marker=new google.maps.Marker({
           position: new google.maps.LatLng( markers[i].loc.coordinates[0], markers[i].loc.coordinates[1]),
           // animation: google.maps.Animation.BOUNCE
-      });    marker.setMap(map);
+      });
+      marker.setMap(map);
 
     }
 
@@ -27,6 +28,7 @@ function initialize() {
 }
 
 function loadScript(data,userCoords) {
+  console.log("google map", data, userCoords)
   $( document ).ready(function() {
     markers = data;
     user = userCoords;

@@ -7,7 +7,8 @@ var express = require('express'),
   mongoose = require('mongoose'),
   api= require('./routes/api'),
   jade = require('jade'),
-  cors = require('cors');
+  cors = require('cors'),
+  responseTime = require('response-time');
 
 var Schema = mongoose.Schema;
 
@@ -37,6 +38,8 @@ app.configure(function(){
   app.set('view options', {
     layout: false
   });
+
+  app.use(responseTime())
 
   app.use(express.bodyParser());
 

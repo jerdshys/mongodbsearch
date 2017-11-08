@@ -104,9 +104,12 @@ exports.searchRemoteManual = function(req,res) {
         if (!error) {
             console.log("body",body)
             console.log(body.data)
-            r.json({
-              tab : body.hits.hits
-            });
+            if(body.hits) {
+              r.json({
+                tab : body.hits.hits
+              });
+            }
+
         }
         else {
           console.log("error",error)

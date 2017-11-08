@@ -30,11 +30,15 @@ function SearchCtrl($scope, $http, $location, $filter)
     $scope.searchAction = function() {
       $http.get('/api/search/'+$scope.search).then(function(response) {
         $scope.supermarches = response.data.tab;
+        loadScript($scope.supermarches,$scope.user);
+
       });
 
       $http.get('/api/search/remote/'+$scope.search).then(function(response) {
         $scope.remoteSupermarches = response.data.tab;
       });
+
+
     }
 
 
